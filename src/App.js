@@ -5,7 +5,7 @@ import "./styles/styles.scss";
 function App() {
   
   return (
-    <div className="mobile-div">
+    <>
       <ApiContext>
         <Router>
           <Routes>
@@ -13,7 +13,7 @@ function App() {
           </Routes>
         </Router>
       </ApiContext>
-    </div>
+    </>
   );
 }
 
