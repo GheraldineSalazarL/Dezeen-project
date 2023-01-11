@@ -21,3 +21,19 @@
 //       @content;
 //     }
 // }
+
+
+
+// div{
+//   background-color: red;
+//   @include screen_601{
+//       background-color: blue;
+//   }
+// }
+
+// h1{
+//   color: black;
+//   @include screen_601{
+//       color: white;
+//   }
+// }

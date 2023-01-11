@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, query, collection, where, addDoc, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, getDocs, query, collection, where, addDoc } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
 
 export const UseApiContext = createContext();
@@ -51,10 +51,8 @@ export const ApiContext = ({ children }) => {
 
     // PARAMETROS QUE DEBE TENER EL DOCUMENTO "USER"
     // usuarioEjemplo={
-    //     nombreApellido:"",
+    //     email:"",
     //     contrasena:"",
-    //     favoritos:[],
-    //     carrito:[]
     // }
 
     const emailJS = async (data)=>{

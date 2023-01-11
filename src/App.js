@@ -5,15 +5,13 @@ import "./styles/styles.scss";
 function App() {
   
   return (
-    <>
-      <ApiContext>
-        <Router>
-          <Routes>
-            <Route path="/" element={<></>} />
-          </Routes>
-        </Router>
-      </ApiContext>
-    </>
+    <ApiContext>
+      <Router>
+        <Routes>
+          <Route path="/" element={<></>} />
+        </Routes>
+      </Router>
+    </ApiContext>
   );
 }
 
