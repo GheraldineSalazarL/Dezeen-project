@@ -30,11 +30,11 @@ export const ApiContext = ({ children }) => {
 
     const collectionByParam = async (nameCollection, param, type) => {
         // REVISAR EN LA DOCUMENTACION DE FIREBASE COMO LLAMAR DOCUMENTOS CON PARAMETRO WHERE. USAR "param" Y "type".
-        const gamesNFS = await getDocs(query(collection(db, nameCollection), where()));
-        const games = gamesNFS.docs.map((doc) => {
+        const collectionsData = await getDocs(query(collection(db, nameCollection), where()));
+        const collections = collectionsData.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
         });
-        return games;
+        return collections;
     };
 
     const getUser = async(idUser) => {
