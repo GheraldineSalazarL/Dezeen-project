@@ -1,0 +1,48 @@
+.Navbar{
+    border-bottom: 2px solid #979797;
+    height: 64px;
+    justify-content: space-between;
+    padding: 8px 17px 8px 17px;
+    .logo{
+        margin-right: 40px;
+    }
+    .search{
+        color: #979797;
+        .icon{
+            margin-right: 7px;
+        }
+        input{
+            height: 21px;
+            width: 214px;
+            border: 0px;
+        }
+        input::placeholder{
+            color: #979797; 
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13.8053px;
+            line-height: 21px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        li{
+            margin-right: 20px;
+            height: 48px;
+            width: 89px;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.0015em;
+            a:link{
+                text-decoration: none;
+            }
+        }
+    }
+    .iconMenu{
+        color: #1C1B1F;
+        width: 18px;
+        margin-right: 12px;
+    }
+}
