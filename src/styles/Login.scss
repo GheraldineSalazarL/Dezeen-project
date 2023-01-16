@@ -1,34 +1,42 @@
-.sigin{
-    .imgSigin{
+@mixin marginH2($top, $rigth){
+    margin: $top $rigth 0px 0px;
+    font-style: normal;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+}
+
+.login{
+    .imgLogin{
         width: 66.7%;
         img{
             // width: 100%;
             // height: 100%;
         }
     }
-    .textSigin{
+    .textLogin{
         width: 33.3%;
-        .textSiginInt{
+        .textLoginInt{
             margin-left: 89px;
-            h2{
-                font-style: normal;
-                font-size: 48px;
-                font-weight: 700;
-                line-height: 56px;
-                margin: 122px 135px 0px 0px;
+            .h2-login{
+                @include marginH2(193px, 146px);
+            }
+            .h2-sigin{
+                @include marginH2(122px, 135px);
             }
             p.font-w-400{
                 margin: 16px 88px 0px 0px;
                 font-size: 20px;
             }
-            .formSigin{
+            .formLogin{
                 margin-top: 54px;
                 button.white-button{
                     width: 70%
                 }
-                .divCheckbox{
+                .divCheckbox-sigin{
                     margin-top: 17px;
                     width: 70%;
+                    color: #797A7C;
                     .checkbox{
                         border: 1px solid #606999;
                         border-radius: 4px;
@@ -45,7 +53,19 @@
                         }
                     }
                 }
-                .finishSigin.d-flex-center.d-flex-column.font-w-400{
+                .divCheckbox-login{
+                    @extend .divCheckbox-sigin;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.004em;
+                    a.principal-color{
+                        text-decoration: none;
+                        color: #979797;
+                    }
+                }
+                .finishLogin{
                     margin-top: 32px;
                     margin-bottom: 105px;
                     width: 70%;

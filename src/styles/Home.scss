@@ -1,0 +1,37 @@
+.Home.font-roboto-cond{
+    .ContentHome{
+        margin: 0px;
+        padding-left: 80px;
+        padding-top: 30px;
+
+        .RecommendProjects{
+            .SubTitleProjects{
+                align-items: baseline;
+                justify-content: space-between;
+                margin: 15px 0px 15px 0px;
+                h3{
+                    font-style: normal;
+                    font-size: 34px;
+                    line-height: 40px;
+                    letter-spacing: 0.0025em;
+                }
+                .ArrowRight{
+                    align-items: baseline;
+                    color: #606999;
+                    margin-right: 80px;
+                    p{
+                        font-style: normal;
+                        font-size: 24px;
+                        line-height: 28px;
+                        margin-right: 9px;
+                    }
+                }
+            }
+        }
+
+        .Separator{
+            margin: 32px 80px 32px 0px;
+            border: 1px solid #606999;
+        }
+    }
+}

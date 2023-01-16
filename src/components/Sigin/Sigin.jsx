@@ -3,16 +3,16 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 const Sigin = () => {
   return (
-    <div className='sigin d-flex-row font-roboto-cond black'>
+    <div className='login d-flex-row font-roboto-cond black'>
         <AiOutlinePlus className='iconClosed'/>
-        <div className='imgSigin'>
+        <div className='imgLogin'>
             <img src="../../assets/login-1.png" alt="" width="100%" height="100%"/>
         </div>
-        <div className='textSigin'>
-            <div className='textSiginInt'>
-                <h2>¡Te damos la bienvenida!</h2>
+        <div className='textLogin'>
+            <div className='textLoginInt'>
+                <h2 className='h2-sigin'>¡Te damos la bienvenida!</h2>
                 <p className='font-w-400'>Regístrate y forma parte de la comunidad más grande de arquitectura en el mundo.</p>
-                <form action="" className='formSigin'>
+                <form action="" className='formLogin'>
                     <input
                         name='email'
                         // type={text}                       
@@ -35,7 +35,7 @@ const Sigin = () => {
                         Crear una cuenta
                     </button>
                     <br />
-                    <div className='d-flex-row divCheckbox'>
+                    <div className='d-flex-row divCheckbox-sigin'>
                         <input 
                             className='checkbox'
                             type="checkbox"
@@ -46,7 +46,7 @@ const Sigin = () => {
                             Acepto los <span className='.principal-color'>Términos y Condiciones </span> de nuestra <br /> <span>Política de Privacidad.</span>
                         </label>
                     </div>
-                    <div className='finishSigin d-flex-center d-flex-column font-w-400'>
+                    <div className='finishLogin d-flex-center d-flex-column font-w-400'>
                         <p>¿Ya tienes cuenta?</p>
                         <p><a className='principal-color' href="">Inicia sesión aquí</a></p>
                     </div>

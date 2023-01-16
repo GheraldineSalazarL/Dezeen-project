@@ -1,0 +1,44 @@
+.Project{
+    width: 955px;
+    margin-right: 128px;
+    padding: 0px;
+    .ImagesProject{
+        width: 100%;
+        margin-bottom: 13px;
+        .ImagePrincipal{
+            margin-right: 20px;
+        }
+        .ImagesProjectColumn{
+            justify-content: space-between;
+        }
+    }
+    .TitleProject{
+        align-items: baseline;
+        justify-content: space-between;
+        font-style: normal;
+        h3{
+            font-size: 24px;
+            line-height: 28px;
+            display: flex;
+            align-items: center;
+        }
+        button{
+            width: 197px;
+            height: 54px;
+            font-size: 20px;
+            line-height: 23px;
+            letter-spacing: 0.0015em;
+            border: 1px solid #606999;
+            color: #606999;
+        }
+    }
+    .DescriptionProject{
+        width: 100%;
+        margin-top: 25px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 23px;
+        letter-spacing: 0.0015em;
+    }
+}

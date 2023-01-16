@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import { FaSearch  } from 'react-icons/fa';
 import { FaRegUserCircle  } from 'react-icons/fa';
 import { FaBars  } from 'react-icons/fa';
@@ -19,14 +20,12 @@ const Navbar = () => {
             </div>
         </div>
         <div className='d-flex-row d-flex-center'>
-            <div className='d-flex-center'>
-                <ul className='d-flex-row d-flex-center'>
-                    <li className='d-flex-center'><a className='black font-w-400' href="">Proyectos</a></li>
-                    <li className='d-flex-center'><a className='black font-w-400' href="">Novedades</a></li>
-                    <li className='d-flex-center'><a className='black font-w-400' href="">Comunidad</a></li>
-                    <li className='d-flex-center'><a className='black font-w-400' href="">Nosotros</a></li>
-                    <li className='d-flex-center'><a className='black font-w-400' href="">Ingresa</a></li>
-                </ul>
+            <div className='itemsMenu d-flex-row d-flex-center'>
+                <NavLink to='' className='itemM d-flex-center black font-w-400'>Ingresa</NavLink>
+                <NavLink to='' className='itemM d-flex-center black font-w-400'>Proyectos</NavLink>
+                <NavLink to='' className='itemM d-flex-center black font-w-400'>Novedades</NavLink>
+                <NavLink to='' className='itemM d-flex-center black font-w-400'>Comunidad</NavLink>
+                <NavLink to='' className='itemM d-flex-center black font-w-400'>Nosotros</NavLink>
             </div>
             <FaRegUserCircle className='iconMenu'/>
             <FaBars className='iconMenu'/>
