@@ -5,27 +5,33 @@ import { FaRegUserCircle  } from 'react-icons/fa';
 import { FaBars  } from 'react-icons/fa';
 
 const Navbar = () => {
+
+    const handleSubmit = (event) =>{
+        event.preventDefault()
+        console.log("submit")
+    }
+
   return (
     <nav className='Navbar d-flex-row font-roboto-cond black d-flex-row'>
         <div className='d-flex-row d-flex-center'>
-            <img className='logo' src="../../assets/dezeen-logo.png" width="148px" height="100%" alt="" />
-            <div className='search d-flex-row d-flex-center'>
-                <FaSearch className='icon'/>
+            <NavLink to='/*' className='LogoContain'> <img className='logo' src="../../assets/dezeen-logo.png" alt="" /> </NavLink>
+            <form className='search d-flex-row d-flex-center' onSubmit={handleSubmit}>
+                <button type='submit'><FaSearch className='icon'/></button>
                 <input 
                     type="text" 
                     name="" 
                     id="" 
                     placeholder='¿Qué estás buscando hoy?'
                 />
-            </div>
+            </form>
         </div>
         <div className='d-flex-row d-flex-center'>
             <div className='itemsMenu d-flex-row d-flex-center'>
-                <NavLink to='' className='itemM d-flex-center black font-w-400'>Ingresa</NavLink>
-                <NavLink to='' className='itemM d-flex-center black font-w-400'>Proyectos</NavLink>
-                <NavLink to='' className='itemM d-flex-center black font-w-400'>Novedades</NavLink>
-                <NavLink to='' className='itemM d-flex-center black font-w-400'>Comunidad</NavLink>
-                <NavLink to='' className='itemM d-flex-center black font-w-400'>Nosotros</NavLink>
+                <NavLink to='/login' className='itemM d-flex-center black font-w-400'>Ingresa</NavLink>
+                <NavLink to='/proyectos' className='itemM d-flex-center black font-w-400'>Proyectos</NavLink>
+                <NavLink to='/novedades' className='itemM d-flex-center black font-w-400'>Novedades</NavLink>
+                <NavLink to='/comunidad' className='itemM d-flex-center black font-w-400'>Comunidad</NavLink>
+                <NavLink to='/nosotros' className='itemM d-flex-center black font-w-400'>Nosotros</NavLink>
             </div>
             <FaRegUserCircle className='iconMenu'/>
             <FaBars className='iconMenu'/>
