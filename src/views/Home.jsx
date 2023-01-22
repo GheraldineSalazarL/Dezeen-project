@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaArrowRight  } from  "react-icons/fa";
-import { Link } from 'react-router-dom';
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';

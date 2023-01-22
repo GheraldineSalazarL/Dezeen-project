@@ -12,7 +12,7 @@ import NavbarProjects from "./components/NavbarProjects/NavbarProjects.jsx";
 import ProjectDetailContainer from "./components/Projects/ProjectDetailContainer/ProjectDetailContainer.js";
 
 function App() {
-  
+
   return (
     // <ApiContext>
     //   <Router>

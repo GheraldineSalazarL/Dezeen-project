@@ -1,7 +1,18 @@
 .Project{
     width: 955px;
     // margin-right: 128px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+    .Tittle-active{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 40px;
+        letter-spacing: 0.0025em;
+        margin-bottom: 15px;
+    }
+    .Tittle-none{
+        display: none;
+    }
     .ImagesProject{
         margin-bottom: 13px;
         width: 955px;

@@ -120,8 +120,8 @@ const proyectos = [
         destacada: false,
     },
     {
-        id: 6,
-        nombre:"Proyecto6",
+        id: 16,
+        nombre:"Proyecto16",
         img:"https://via.placeholder.com/250",
         desc:"Loremfksjdfk lsjdflkjsdkfjslkdjflksdjflks jdflkjsdlfkjs d lkfjlskd jflsk djflksdjflks j dflk jsdlk fjslkdj flskdjflksdjf lksdjlkk kkkkkkkkkkkkk kkkkkkkkkk kkkkkkkkkk kkkkkkkkkkk kkkkkkkkk kk kkk kkk kkkkk kkkkkkkk kkkkkkkkk kkkkkkkk kkkkkkkk kkkkkkkk kk kkkkk k kkkkkkkkk kkkkkkkk kkkkkkkkk kkkkkkk kk kkkk",
         category:"diseño",

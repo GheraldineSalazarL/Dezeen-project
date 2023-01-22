@@ -1,9 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Project = ({proyecto}) => {
+
+    const location = useLocation()
+
     return (
       <div className='Project'>
+        <h2 className={location.pathname!=="/" ? "Tittle-active" : "Tittle-none"}>{proyecto.nombre}</h2>
           <div className='ImagesProject d-flex-row'>
               <img className='ImagePrincipal' src={proyecto.img} alt="" />
               <div className='ImagesProjectColumn d-flex-column'>
