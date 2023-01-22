@@ -1,0 +1,21 @@
+.Proyectos{
+    .ContentProyectos{
+        justify-content: space-around;
+        margin: 40px 60px 62px 60px;
+        .ColumnProjects{
+            flex-direction: row;
+            width: 955px;
+            margin-right: 42px;
+                h2{
+                    font-size: 34px;
+                    line-height: 40px;
+                    text-align: right;
+                }
+                .hrContentProyectos{
+                    margin: 18px 0px 18px 0px;
+                    border: 2px solid #000000;;
+                }
+        }
+
+    }
+}
