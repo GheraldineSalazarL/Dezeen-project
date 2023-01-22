@@ -3,7 +3,7 @@ import Project from '../Project/Project'
 
 const ProjectList = ({proyectos = []}) => {
   return (
-    <div className="d-flex-row">
+    <div className="">
         {
             proyectos.map((proy) => {
                 return <Project proyecto={proy} key={proy.id}/>

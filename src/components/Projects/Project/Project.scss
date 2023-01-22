@@ -1,12 +1,14 @@
 .Project{
     width: 955px;
-    margin-right: 128px;
-    padding: 0px;
+    // margin-right: 128px;
+    margin-bottom: 30px;
     .ImagesProject{
-        width: 100%;
         margin-bottom: 13px;
+        width: 955px;
+        justify-content: space-between;
         .ImagePrincipal{
-            margin-right: 20px;
+            width: 738px;
+            height: 661px;
         }
         .ImagesProjectColumn{
             justify-content: space-between;
@@ -22,7 +24,7 @@
             display: flex;
             align-items: center;
         }
-        button{
+        .buttonProject{
             width: 197px;
             height: 54px;
             font-size: 20px;
@@ -30,6 +32,7 @@
             letter-spacing: 0.0015em;
             border: 1px solid #606999;
             color: #606999;
+            text-decoration: none;
         }
     }
     .DescriptionProject{
