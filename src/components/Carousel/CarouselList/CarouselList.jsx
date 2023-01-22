@@ -18,7 +18,7 @@ const CarouselList = ({proyectos=[]}) => {
                     {
                       imagenActual === index
                       &&
-                      <Carousel proyecto={proy} proyectosLength={proyectos.length} imagenActual={imagenActual} setImagenActual={setImagenActual}key={proy.id} />
+                      <Carousel proyecto={proy} proyectosLength={proyectos.length} imagenActual={imagenActual} setImagenActual={setImagenActual} key={proy.id} />
                     }
                   </>
                 )

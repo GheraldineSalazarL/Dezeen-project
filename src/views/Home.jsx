@@ -6,6 +6,8 @@ import NewListContainer from '../components/News/NewsListContainer/NewListContai
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';
 
 const Home = () => {
+
+  
   return (
     <div className='Home font-roboto-cond black'>
         
@@ -13,20 +15,11 @@ const Home = () => {
 
         <div className='ContentHome'>
 
-          <div className='Title'>
-            <div className='SubTitle d-flex-row font-w-400'>
-              <h3>Noticias destacadas</h3>
-              <button className='ArrowRight d-flex-row font-roboto-cond'>
-                <p>Siguiente página</p>
-                <FaArrowRight className='icon'/>
-              </button>
-            </div>
-            <NewListContainer/>
-          </div>
+          <NewListContainer/>
           
           <hr className='Separator'/>
 
-          <div className='Title'>
+          <div className='Headers'>
             <div className='SubTitle d-flex-row font-w-400'>
               <h3 >Dezeen te recomienda</h3>
               <div className='ArrowRight d-flex-row'>

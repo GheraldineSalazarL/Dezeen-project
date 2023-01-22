@@ -2,7 +2,7 @@ import React from 'react'
 // import { useState } from 'react';
 import { FaArrowRight,  FaArrowLeft} from "react-icons/fa";
 import { Link } from 'react-router-dom';
-// import { handleAfter, handleNext } from '../CarouselList/CarouselList'
+// import { handlePrevious, handleNext } from '../CarouselList/CarouselList'
 
 
 const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) => {
@@ -10,7 +10,7 @@ const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) =>
   const handleNext = () => {
     setImagenActual (imagenActual === proyectosLength-1 ? 0 : imagenActual+1)
   }
-  const handleAfter = () => {
+  const handlePrevious = () => {
     setImagenActual (imagenActual === 0 ? proyectosLength-1 : imagenActual-1)
   }
 
@@ -32,7 +32,7 @@ const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) =>
               <h1 > {proyecto.nombre}</h1>
               <h4 >{proyecto.nombre}</h4>
               <p className='slider_description'>{proyecto.desc}</p>
-              <button className='Left' onClick={handleAfter}><FaArrowLeft className='icon'/></button>
+              <button className='Left' onClick={handlePrevious}><FaArrowLeft className='icon'/></button>
               <button className='Right' onClick={handleNext}><FaArrowRight className='icon'/></button>
               <div className='itemsAll d-flex-row d-flex-center'>
                 {
