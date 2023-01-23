@@ -1,10 +1,12 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FaSearch  } from 'react-icons/fa';
 import { FaRegUserCircle  } from 'react-icons/fa';
 import { FaBars  } from 'react-icons/fa';
 
 const Navbar = () => {
+
+    const location = useLocation()
 
     const handleSubmit = (event) =>{
         event.preventDefault()
@@ -27,11 +29,11 @@ const Navbar = () => {
         </div>
         <div className='d-flex-row d-flex-center'>
             <div className='itemsMenu d-flex-row d-flex-center'>
-                <NavLink to='/login' className='itemM d-flex-center black font-w-400'>Ingresa</NavLink>
-                <NavLink to='/proyectos' className='itemM d-flex-center black font-w-400'>Proyectos</NavLink>
-                <NavLink to='/novedades' className='itemM d-flex-center black font-w-400'>Novedades</NavLink>
-                <NavLink to='/comunidad' className='itemM d-flex-center black font-w-400'>Comunidad</NavLink>
-                <NavLink to='/nosotros' className='itemM d-flex-center black font-w-400'>Nosotros</NavLink>
+                <NavLink to='/login' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/login" ? "colorSelect" : ""}`}>Ingresa</NavLink>
+                <NavLink to='/proyectos' className={`itemM d-flex-center black font-w-400 ${location.pathname.includes(`/proyectos`) ? "colorSelect" : ""}`}>Proyectos</NavLink>
+                <NavLink to='/novedades' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/novedades" ? "colorSelect" : ""}`}>Novedades</NavLink>
+                <NavLink to='/comunidad' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/comunidad" ? "colorSelect" : ""}`}>Comunidad</NavLink>
+                <NavLink to='/nosotros' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/nosotros" ? "colorSelect" : ""}`}>Nosotros</NavLink>
             </div>
             <FaRegUserCircle className='iconMenu'/>
             <FaBars className='iconMenu'/>

@@ -49,6 +49,12 @@
             line-height: 19px;
             letter-spacing: 0.0015em;
             text-decoration: none;
+            &:hover{
+                color: #606999;
+            }
+        }
+        .colorSelect{
+            color:#606999;
         }
     }
     .iconMenu{

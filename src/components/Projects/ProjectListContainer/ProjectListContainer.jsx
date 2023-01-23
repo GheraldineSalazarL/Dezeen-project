@@ -8,6 +8,7 @@ const ProjectListContainer = () => {
 
     const [proyectos, setProyectos] = useState([])
     const {categoryId} = useParams()
+    console.log(categoryId)
 
     useEffect(() => {
         pedirDatosProyectos()
