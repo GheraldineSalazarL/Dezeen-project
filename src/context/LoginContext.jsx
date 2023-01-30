@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
@@ -17,12 +18,15 @@ const usuarios = [
 
 export const LoginProvider = ({children}) => {
 
-    const [user, setUser] = useState({
+    const loginStorage = JSON.parse(localStorage.getItem('logeo')) || 
+    [{
         user : '',
         logged:false,
         msjPassword:'',
         msjUser:''
-    })
+    }]
+
+    const [user, setUser] = useState(loginStorage)
     
     const login = (values) => {
         const match = usuarios.find(user => user.email === values.email)
@@ -50,7 +54,12 @@ export const LoginProvider = ({children}) => {
             user: '',
             logged: false
         })
+        
     }
+
+    useEffect(() => {
+        localStorage.setItem('logeo', JSON.stringify(user))
+    },[user])
 
     return(
         <LoginContext.Provider value={{user, login, logout}}>

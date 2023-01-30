@@ -23,11 +23,20 @@ const AppRouter = () => {
 
                 {
                     user.logged
-                    ? <Route path="/login" element={<Navigate to ="/"/>} />
-                    : <Route path="/login" element={<Login/>} />
+                    ? 
+                    <>
+                      <Route path="/login" element={<Navigate to ="/"/>} />
+                      <Route path="/sigin" element={<Navigate to ="/"/>} />
+                    </>
+                    
+                    : 
+                    <>
+                      <Route path="/login" element={<Login/>} />
+                      <Route path="/sigin" element={<Sigin/>} />
+                    </>
                 }
                 
-                <Route path="/sigin" element={<Sigin/>} />
+
                 <Route path="*" element={<Navigate to ="/"/>} />
                 <Route path="/" element={<Home/>} />
                 <Route path="/proyectos" element={<Proyectos/>} />
