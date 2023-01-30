@@ -6,7 +6,7 @@ import ProjectDetail from '../ProjectDetail/ProjectDetail'
 
  const ProjectDetailContainer = () => {
 
-  const [detalleProyecto, setDetalleProyecto] = useState(null)
+  const [detalleProyecto, setDetalleProyecto] = useState({ })
   const {proyectoId} = useParams()
   console.log(proyectoId)
   console.log(detalleProyecto)

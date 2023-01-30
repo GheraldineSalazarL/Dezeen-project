@@ -27,7 +27,7 @@ const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) =>
   
   return (
     <div className='Carousel'>
-              <Link to={`/proyecto/${proyecto.id}`}><img src={proyecto.img} alt="" /></Link>
+              <Link to={`/proyectos/${proyecto.category}/${proyecto.id}`}><img src={proyecto.img} alt="" /></Link>
               <h3 >{May.charAt(0).toUpperCase() + May.slice(1)}</h3>
               <h1 > {proyecto.nombre}</h1>
               <h4 >{proyecto.nombre}</h4>

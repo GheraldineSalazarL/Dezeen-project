@@ -18,7 +18,7 @@ const Project = ({proyecto}) => {
           </div>
           <div className='TitleProject d-flex-row font-w-400'>
               <h3>{proyecto.nombre}</h3>
-              <Link to={`/proyecto/${proyecto.id}`} className='buttonProject white-button d-flex-center '>Leer el artículo</Link>
+              <Link to={`/proyectos/${proyecto.category}/${proyecto.id}`} className='buttonProject white-button d-flex-center '>Leer el artículo</Link>
           </div>
           <p className='DescriptionProject'>{proyecto.desc}</p>
           <p>{proyecto.category}</p>

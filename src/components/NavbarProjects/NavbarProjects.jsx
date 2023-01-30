@@ -24,7 +24,7 @@ const NavbarProjects = () => {
           <NavLink to='/proyectos/destacados' className={`ItemMenuProyecto ${location.pathname==="/proyectos/destacados" ? "colorSelect" : ""}`}>Destacados</NavLink>
           {
             Categories.map((cat) => {
-                  return <NavLink to={`/proyectos/${cat}`} className={`ItemMenuProyecto ${location.pathname===`/proyectos/${cat}` ? "colorSelect" : ""}`}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</NavLink>
+                  return <NavLink to={`/proyectos/${cat}`} className={`ItemMenuProyecto ${location.pathname.includes(`/proyectos/${cat}`) ? "colorSelect" : ""}`}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</NavLink>
                   
               })
           }

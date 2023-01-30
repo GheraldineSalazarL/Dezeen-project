@@ -87,6 +87,9 @@
             width: 26px;
             height: 23px;
             cursor: pointer;
+            &:hover{
+                color: #606999;
+            }
         }
         .itemsAll{
             width: 100%;
@@ -103,6 +106,9 @@
                 border: 0;
                 margin: 0px 4px 0px 4px;
                 cursor: pointer;
+                &:hover{
+                    background-color: #606999;
+                }
             }
             .item-active{
                 @extend .item;
