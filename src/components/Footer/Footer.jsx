@@ -1,9 +1,21 @@
 import React from 'react'
 import { BsYoutube, BsPinterest, BsTwitter, BsInstagram, BsFacebook } from "react-icons/bs";
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+
+    const location = useLocation()
+
+    const footerActive = () => {
+        if(location.pathname!=="/login" && location.pathname!=="/sigin"){
+            return "Footer d-flex-column font-roboto-cond black"
+        } else {
+            return "Footer-none"
+        }
+    }
+
   return (
-    <div className='Footer font-roboto-cond black'>
+    <div className={footerActive()}>
         <hr className='Separator'/>
         <div className='MenuFooter'>
             <ul className='d-flex-row black'>
