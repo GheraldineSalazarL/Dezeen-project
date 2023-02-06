@@ -10,6 +10,7 @@ const ProjectListContainer = () => {
     const [proyectos, setProyectos] = useState([])
     const {categoryId} = useParams()
     const location = useLocation()
+    // console.log(location)
 
     useEffect(() => {
         pedirDatosProyectos()

@@ -1,12 +1,16 @@
 import React from 'react'
-import { FaArrowRight  } from  "react-icons/fa";
+// import { FaArrowRight  } from  "react-icons/fa";
+import { useLocation } from 'react-router-dom';
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';
+import ProjectListContainerCategory from '../components/Projects/ProjectListContainer/ProjectListContainerCategory';
 
 const Home = () => {
 
-  
+  const location = useLocation()
+  console.log(location)
+
   return (
     <div className='Home font-roboto-cond black'>
         
@@ -17,7 +21,7 @@ const Home = () => {
           <NewListContainer/>
           
           <hr className='Separator'/>
-          
+
           <ProjectListContainer />
 
           <hr className='Separator'/>
@@ -36,16 +40,19 @@ const Home = () => {
 
           <hr className='Separator'/>
 
-          <div className='Headers'>
-            <div className='SubTitle d-flex-row font-w-400'>
-              <h3 >Proyectos de</h3>
-              <div className='ArrowRight d-flex-row font-roboto-cond'>
-                <p>Siguiente proyecto</p>
-                <FaArrowRight className='icon'/>
+          {/* <div id='prueba'>
+            <div className='Headers'>
+              <div className='SubTitle d-flex-row font-w-400'>
+                <h3 >Proyectos de</h3>
+                <div className='ArrowRight d-flex-row font-roboto-cond'>
+                  <p>Siguiente proyecto</p>
+                  <FaArrowRight className='icon'/>
+                </div>
               </div>
+              <ProjectListContainer />
             </div>
-            <ProjectListContainer />
-          </div>
+          </div> */}
+          <ProjectListContainerCategory/>
 
           <hr className='Separator'/>
 
