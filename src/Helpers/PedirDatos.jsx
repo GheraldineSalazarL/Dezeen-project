@@ -80,8 +80,8 @@ const proyectos = [
         destacada: true,
     },
     {
-        id: 1,
-        nombre:"Proyecto1",
+        id: 11,
+        nombre:"Proyecto11",
         img:"https://via.placeholder.com/250",
         desc:"Loremfksjdf klsjdflkjsdkfjslkdjflksdjflk sjdflkjsdlfkj s dlkfjlsk djfls kdjflksdjflk s jdfl kjsdl kfjslkd jflskdjflksdj flksdjlk kkkkkkkkkkkkk kkkkkkkkkk kkkkkkkkkk kkkkkkkkkkk kkkkkkkkk kk kkk kkk kkkkk kkkkkkkk kkkkkkkkk kkkkkkkk kkkkkkkk kkkkkkkk kk kkkkk k kkkkkkkkk kkkkkkkk kkkkkkkkk kkkkkkk kk kkkkk",
         category:"interiorismo",

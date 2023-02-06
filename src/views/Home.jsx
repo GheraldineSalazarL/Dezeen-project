@@ -17,17 +17,8 @@ const Home = () => {
           <NewListContainer/>
           
           <hr className='Separator'/>
-
-          <div className='Headers'>
-            <div className='SubTitle d-flex-row font-w-400'>
-              <h3 >Dezeen te recomienda</h3>
-              <div className='ArrowRight d-flex-row'>
-                <p>Siguiente proyecto</p>
-                <FaArrowRight />
-              </div>
-            </div>
-            <ProjectListContainer />
-          </div>
+          
+          <ProjectListContainer />
 
           <hr className='Separator'/>
 
@@ -45,12 +36,12 @@ const Home = () => {
 
           <hr className='Separator'/>
 
-          <div className='Recommend'>
+          <div className='Headers'>
             <div className='SubTitle d-flex-row font-w-400'>
               <h3 >Proyectos de</h3>
-              <div className='ArrowRight d-flex-row'>
+              <div className='ArrowRight d-flex-row font-roboto-cond'>
                 <p>Siguiente proyecto</p>
-                <FaArrowRight />
+                <FaArrowRight className='icon'/>
               </div>
             </div>
             <ProjectListContainer />
