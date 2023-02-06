@@ -2,6 +2,7 @@ import React from 'react'
 // import { FaArrowRight  } from  "react-icons/fa";
 import { useLocation } from 'react-router-dom';
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
+import CreatorsList from '../components/Creators/CreatorsList';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';
 import ProjectListContainerCategory from '../components/Projects/ProjectListContainer/ProjectListContainerCategory';
@@ -40,30 +41,11 @@ const Home = () => {
 
           <hr className='Separator'/>
 
-          {/* <div id='prueba'>
-            <div className='Headers'>
-              <div className='SubTitle d-flex-row font-w-400'>
-                <h3 >Proyectos de</h3>
-                <div className='ArrowRight d-flex-row font-roboto-cond'>
-                  <p>Siguiente proyecto</p>
-                  <FaArrowRight className='icon'/>
-                </div>
-              </div>
-              <ProjectListContainer />
-            </div>
-          </div> */}
           <ProjectListContainerCategory/>
 
           <hr className='Separator'/>
 
-          <div className='Creators d-flex-center d-flex-column'>
-            <h2 className='TitleCreators'>Conoce al equipo que creó el sitio web</h2>
-            <div className='PhotosCreators'>
-              <img src="https://via.placeholder.com/250" alt="" />
-              <img src="https://via.placeholder.com/250" alt="" />
-              <img src="https://via.placeholder.com/250" alt="" />
-            </div>
-          </div>
+          <CreatorsList/>
 
         </div>
 
