@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdOutlineAlternateEmail, MdCheck } from "react-icons/md";
+// import { MdOutlineAlternateEmail, MdCheck } from "react-icons/md";
 
 
 const Newsletter = ({Newsletter}) => {
@@ -12,9 +12,9 @@ const Newsletter = ({Newsletter}) => {
     //         <MdCheck/>
     //     </div>
         <div className=''>
-            <img className='ImagePrincipal' src={Newsletter.img} alt="" />
-            <h3>{Newsletter.nombre}</h3>
-            <p>{Newsletter.detail}</p>
+            <img className='ImagePrincipal' src={Newsletter.foto} alt="" />
+            <h3>{Newsletter.titulo}</h3>
+            <p>{Newsletter.descripcion}</p>
         </div>
         
     // </div>

@@ -1,19 +1,27 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import NewsletterList from '../NewsletterList/NewsletterList'
-import { pedirDatosNewsletter } from '../../../Helpers/PedirDatos'
+// import { pedirDatosNewsletter } from '../../../Helpers/PedirDatos'
 import { MdOutlineAlternateEmail, MdCheck } from "react-icons/md";
-
+import { collection, getDocs } from 'firebase/firestore';
+import {db} from '../../../context/ApiContext'
 
 const NewsletterListContainer = () => {
 
     const [newsletters, setNewsletters] = useState([])
 
     useEffect(() => {
-        pedirDatosNewsletter()
-            .then((res) => {
-                setNewsletters(res)
+        // pedirDatosNewsletter()
+        //     .then((res) => {
+        //         setNewsletters(res)
                 
+        //     })
+        //     .catch((error)=>console.log(error))
+        const newsletterRef = collection(db, 'newsletter')
+        getDocs(newsletterRef)
+            .then((resp) =>{
+                const newslettersDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+                setNewsletters(newslettersDB)
             })
             .catch((error)=>console.log(error))
     }, [])
