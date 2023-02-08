@@ -1,26 +1,21 @@
-.Menu-Active{
-    .MenuProyectos{
-        align-items: center;
-        list-style: none;
-        height: 64px;
-        .ItemMenuProyecto{
-            margin: 0px 10px 0px 10px;
-            text-align: center;
-            text-decoration: none;
-            color: black;   
-            font-size: 16px;
-            line-height: 19px;
-            letter-spacing: 0.0015em;
-            color: #5F6368;
-            &:hover{
-                color:#606999;
-            }
-        }
-        .colorSelect{
+.MenuProyectos{
+    align-items: center;
+    list-style: none;
+    height: 64px;
+    .ItemMenuProyecto{
+        margin: 0px 10px 0px 10px;
+        text-align: center;
+        text-decoration: none;
+        color: black;   
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.0015em;
+        color: #5F6368;
+        &:hover{
             color:#606999;
         }
     }
-}
-.Menu-none{
-    display: none;
+    .colorSelect{
+        color:#606999;
+    }
 }

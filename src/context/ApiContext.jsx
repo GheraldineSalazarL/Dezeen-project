@@ -5,18 +5,20 @@ import emailjs from '@emailjs/browser';
 
 export const UseApiContext = createContext();
 
+const firebaseConfig = {
+    apiKey: "AIzaSyBz4Nw9JIKC5NNLrLlM3v52hJPvNFhcrEg",
+    authDomain: "deezen-1a1d3.firebaseapp.com",
+    projectId: "deezen-1a1d3",
+    storageBucket: "deezen-1a1d3.appspot.com",
+    messagingSenderId: "1072631082383",
+    appId: "1:1072631082383:web:abbd04582c1333cc742ffa"
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+
 export const ApiContext = ({ children }) => {
-    const firebaseConfig = {
-        apiKey: "AIzaSyBz4Nw9JIKC5NNLrLlM3v52hJPvNFhcrEg",
-        authDomain: "deezen-1a1d3.firebaseapp.com",
-        projectId: "deezen-1a1d3",
-        storageBucket: "deezen-1a1d3.appspot.com",
-        messagingSenderId: "1072631082383",
-        appId: "1:1072631082383:web:abbd04582c1333cc742ffa"
-    };
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    
 
 
     const searchCollections = async (nameCollection) => {

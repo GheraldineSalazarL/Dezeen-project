@@ -2,13 +2,15 @@ import React from 'react'
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer'
 import NewsletterContainer from '../components/Newsletters/NewsletterListContainer/NewsletterListContainer'
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
+import { useParams } from 'react-router-dom';
+import NavbarProjects from '../components/NavbarProjects/NavbarProjects';
 
 const Proyectos = () => {
 
-
   return (
-    <div className='Proyectos font-roboto-cond font-w-400'>
-
+    <>
+      <NavbarProjects />
+      <div className='Proyectos font-roboto-cond font-w-400'>
         <CarouselListContainer/>
 
         <div className='ContentProyectos d-flex-row'>
@@ -21,7 +23,8 @@ const Proyectos = () => {
             <NewsletterContainer/>
 
         </div>
-    </div>
+        </div>
+    </>
   )
 }
 

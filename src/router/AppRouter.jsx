@@ -18,7 +18,6 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
            <Navbar/>
-            <NavbarProjects/>
             <Routes>
 
                 {
