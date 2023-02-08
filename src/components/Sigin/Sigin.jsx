@@ -1,13 +1,14 @@
 import React from 'react'
 import { AiOutlinePlus } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
+import imgSigin from '../../assets/login-1.png'
 
 const Sigin = () => {
   return (
     <div className='login d-flex-row font-roboto-cond black'>
         <NavLink to='/'><AiOutlinePlus className='iconClosed'/></NavLink>
         <div className='imgLogin'>
-            <img src="../../assets/login-1.png" alt="" width="100%" height="100%"/>
+            <img src={imgSigin} alt="" width="100%" height="100%"/>
         </div>
         <div className='textLogin'>
             <div className='textLoginInt'>

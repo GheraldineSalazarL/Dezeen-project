@@ -6,6 +6,7 @@ import CreatorsList from '../components/Creators/CreatorsList';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';
 import ProjectListContainerCategory from '../components/Projects/ProjectListContainer/ProjectListContainerCategory';
+import revista from '../assets/revista-banner.png'
 
 const Home = () => {
 
@@ -28,7 +29,7 @@ const Home = () => {
           <hr className='Separator'/>
 
           <div className='Magazine d-flex-row d-flex-center'>
-            <img className='ImageMagazine' src="https://via.placeholder.com/250" alt="" />
+            <img className='ImageMagazine' src={revista} alt="" />
             <div className='TextMagazine font-w-400 d-flex-column d-flex-center'>
               <h2>La revista más popular e influyente del mundo.</h2>
               <p>Nuestra misión es simple: traerte una selección cuidadosamente editada de los mejores proyectos y noticias de arquitectura, diseño e interiores de todo el mundo. 

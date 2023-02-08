@@ -1,10 +1,11 @@
 import React from 'react'
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { FaSearch  } from 'react-icons/fa';
 import { FaRegUserCircle  } from 'react-icons/fa';
 import { FaBars  } from 'react-icons/fa';
 import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
+import logo from '../../assets/dezeen-logo.png'
 
 const Navbar = () => {
 
@@ -29,7 +30,7 @@ const Navbar = () => {
   return (
     <nav className={navActive()}>
         <div className='d-flex-row d-flex-center'>
-            <NavLink to='/*' className='LogoContain'> <img className='logo' src="../../assets/dezeen-logo.png" alt="" /> </NavLink>
+            <NavLink to='/*' className='LogoContain'> <img className='logo' src={logo} alt="" /> </NavLink>
             <form className='search d-flex-row d-flex-center' onSubmit={handleSubmit}>
                 <button type='submit'><FaSearch className='icon'/></button>
                 <input 
@@ -54,8 +55,8 @@ const Navbar = () => {
                 <NavLink to='/comunidad' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/comunidad" ? "colorSelect" : ""}`}>Comunidad</NavLink>
                 <NavLink to='/nosotros' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/nosotros" ? "colorSelect" : ""}`}>Nosotros</NavLink>
             </div>
-            <FaRegUserCircle className='iconMenu'/>
-            <FaBars className='iconMenu'/>
+            <Link><FaRegUserCircle className='iconMenu'/></Link>
+            <Link><FaBars className='iconMenu'/></Link>
         </div>
         
     </nav>

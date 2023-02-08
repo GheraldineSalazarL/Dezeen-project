@@ -1,7 +1,7 @@
 import React from 'react'
 import { BsYoutube, BsPinterest, BsTwitter, BsInstagram, BsFacebook } from "react-icons/bs";
-import { useLocation } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/dezeen-logo2.png'
 const Footer = () => {
 
     const location = useLocation()
@@ -24,16 +24,16 @@ const Footer = () => {
                 <li><a href="">Aviso de privacidad</a></li>
                 <li><a href="">Contáctanos</a></li>
                 <li className=''>
-                    <BsYoutube className='IconFooter'/>
-                    <BsPinterest className='IconFooter'/>
-                    <BsTwitter className='IconFooter'/>
-                    <BsInstagram className='IconFooter'/>
-                    <BsFacebook className='IconFooter'/>
+                    <Link><BsYoutube className='IconFooter'/></Link>
+                    <Link><BsPinterest className='IconFooter'/></Link>
+                    <Link><BsTwitter className='IconFooter'/></Link>
+                    <Link><BsInstagram className='IconFooter'/></Link>
+                    <Link><BsFacebook className='IconFooter'/></Link>
                 </li>
             </ul>
         </div>
         <div className='InfoFooter d-flex-row font-w-400'>
-            <img src="https://via.placeholder.com/250" alt="" />
+            <img src={logo} alt="" />
             <p>Todos los derechos reservados. Dezeen UK  2006 - 2022. <br />
                 ISNN 0823-4365 <br />
                 Todas las imágenes son propiedad de cada fotógrafo/oficina mencionada.
