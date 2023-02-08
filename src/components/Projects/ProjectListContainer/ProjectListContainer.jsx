@@ -1,9 +1,11 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import {pedirDatosProyectos} from '../../../Helpers/PedirDatos'
+// import {pedirDatosProyectos} from '../../../Helpers/PedirDatos'
 import ProjectList from '../ProjectList/ProjectList'
 import { FaArrowRight  } from  "react-icons/fa";
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import {db} from '../../../context/ApiContext'
 
 const ProjectListContainer = () => {
 
@@ -13,16 +15,25 @@ const ProjectListContainer = () => {
     // console.log(location)
 
     useEffect(() => {
-        pedirDatosProyectos()
-            .then((res) => {
-                if (!categoryId){
-                    setProyectos(res)
-                }else if(categoryId==="destacados"){
-                    setProyectos(res.filter((proyecto) => proyecto.destacada === true))
-                }else{
-                    setProyectos(res.filter((proyecto) => proyecto.category === categoryId))
-                }
+        // pedirDatosProyectos()
+        //     .then((res) => {
+        //         if (!categoryId){
+        //             setProyectos(res)
+        //         }else if(categoryId==="destacados"){
+        //             setProyectos(res.filter((proyecto) => proyecto.destacada === true))
+        //         }else{
+        //             setProyectos(res.filter((proyecto) => proyecto.category === categoryId))
+        //         }
                 
+        //     })
+        //     .catch((error)=>console.log(error))
+
+        const proyectosRef = collection(db, 'proyectos')
+        const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
+        getDocs(q)
+            .then((resp) =>{
+                const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+                setProyectos(proyectosDB)
             })
             .catch((error)=>console.log(error))
     }, [categoryId])

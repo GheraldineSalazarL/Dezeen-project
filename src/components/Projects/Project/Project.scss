@@ -1,7 +1,6 @@
 .Project{
     width: 955px;
     // margin-right: 128px;
-    margin-bottom: 50px;
     .Tittle-active{
         font-style: normal;
         font-weight: 400;
@@ -20,9 +19,13 @@
         .ImagePrincipal{
             width: 738px;
             height: 661px;
+            object-fit: cover;
         }
         .ImagesProjectColumn{
             justify-content: space-between;
+            img{
+                object-fit: cover;  
+            }
         }
     }
     .TitleProject{
@@ -56,6 +59,9 @@
         letter-spacing: 0.0015em;
     }
 }
-.ProjectMargin{
+.ProjectMarginRigth{
     margin-right: 128px;
+}
+.ProjectMarginBottom{
+    margin-bottom: 50px;
 }
