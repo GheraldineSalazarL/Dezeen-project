@@ -6,41 +6,31 @@ import ProjectList from '../ProjectList/ProjectList'
 import { FaArrowRight  } from  "react-icons/fa";
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import {db} from '../../../context/ApiContext'
+import useProyectos from '../../../hooks/useProyectos'
 
 const ProjectListContainerCategory = () => {
 
-    const [proyectos, setProyectos] = useState([])
+    const entry = 'ProjectListContainerCategory'
+    const {proyectos, cat} = useProyectos(entry)
+    
+    // const [proyectos, setProyectos] = useState([])
+    // const Categories = []
+    // for (let i=0; i<proyectos.length; i++){
+    //     if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
+    // }
 
-    const Categories = []
-    for (let i=0; i<proyectos.length; i++){
-        if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
-    }
+    // const categoryId = Categories[Math.floor(Math.random() * Categories.length)];
 
-    const categoryId = Categories[Math.floor(Math.random() * Categories.length)];
-
-    useEffect(() => {
-        // pedirDatosProyectos()
-        //     .then((res) => {
-        //         if (!categoryId){
-        //             setProyectos(res)
-        //         }else if(categoryId==="destacados"){
-        //             setProyectos(res.filter((proyecto) => proyecto.destacada === true))
-        //         }else{
-        //             setProyectos(res.filter((proyecto) => proyecto.category === categoryId))
-        //         }
-                
-        //     })
-        //     .catch((error)=>console.log(error))
-
-        const proyectosRef = collection(db, 'proyectos')
-        const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
-        getDocs(q)
-            .then((resp) =>{
-                const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-                setProyectos(proyectosDB)
-            })
-            .catch((error)=>console.log(error))
-    }, [categoryId])
+    // useEffect(() => {
+    //     const proyectosRef = collection(db, 'proyectos')
+    //     const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
+    //     getDocs(q)
+    //         .then((resp) =>{
+    //             const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+    //             setProyectos(proyectosDB)
+    //         })
+    //         .catch((error)=>console.log(error))
+    // }, [])
 
     const [viewAcual, setViewActual] = useState(0)
 
@@ -52,7 +42,7 @@ const ProjectListContainerCategory = () => {
     <div>
         <div className='Headers'>
             <div className='SubTitle d-flex-row font-w-400'>
-            <h3>Proyectos de {categoryId ? categoryId : ""}</h3>
+            <h3>Proyectos de {cat ? cat : ""}</h3>
             <button onClick={handleAfter} className='ArrowRight d-flex-row font-roboto-cond'>
                 <p>Siguiente proyecto</p>
                 <FaArrowRight className='icon'/>

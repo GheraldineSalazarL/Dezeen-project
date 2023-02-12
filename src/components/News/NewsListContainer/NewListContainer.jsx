@@ -10,11 +10,6 @@ const NewListContainer = () => {
 
     const [noticias, setNoticias] = useState([])
     useEffect(() => {
-        // pedirDatosNoticias()
-        //     .then((res) => {
-        //         setNoticias(res)
-        //     })
-        //     .catch((error)=>console.log(error))
         const newsRef = collection(db, 'noticias')
         getDocs(newsRef)
         .then((resp) =>{

@@ -6,37 +6,29 @@ import ProjectList from '../ProjectList/ProjectList'
 import { FaArrowRight  } from  "react-icons/fa";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import {db} from '../../../context/ApiContext'
+import useProyectos from '../../../hooks/useProyectos';
 
 const ProjectListContainer = () => {
 
-    const [proyectos, setProyectos] = useState([])
+    const entry = 'ProjectListContainer'
     const {categoryId} = useParams()
+    const {proyectos} = useProyectos(entry)
     const location = useLocation()
-    // console.log(location)
 
-    useEffect(() => {
-        // pedirDatosProyectos()
-        //     .then((res) => {
-        //         if (!categoryId){
-        //             setProyectos(res)
-        //         }else if(categoryId==="destacados"){
-        //             setProyectos(res.filter((proyecto) => proyecto.destacada === true))
-        //         }else{
-        //             setProyectos(res.filter((proyecto) => proyecto.category === categoryId))
-        //         }
-                
-        //     })
-        //     .catch((error)=>console.log(error))
+    // const [proyectos, setProyectos] = useState([])
+    // const {categoryId} = useParams()
+    // const location = useLocation()
 
-        const proyectosRef = collection(db, 'proyectos')
-        const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
-        getDocs(q)
-            .then((resp) =>{
-                const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-                setProyectos(proyectosDB)
-            })
-            .catch((error)=>console.log(error))
-    }, [categoryId])
+    // useEffect(() => {
+    //     const proyectosRef = collection(db, 'proyectos')
+    //     const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
+    //     getDocs(q)
+    //         .then((resp) =>{
+    //             const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+    //             setProyectos(proyectosDB)
+    //         })
+    //         .catch((error)=>console.log(error))
+    // }, [categoryId])
 
     const [viewAcual, setViewActual] = useState(0)
 

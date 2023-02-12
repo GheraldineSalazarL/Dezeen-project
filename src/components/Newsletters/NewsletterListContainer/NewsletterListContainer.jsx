@@ -11,12 +11,6 @@ const NewsletterListContainer = () => {
     const [newsletters, setNewsletters] = useState([])
 
     useEffect(() => {
-        // pedirDatosNewsletter()
-        //     .then((res) => {
-        //         setNewsletters(res)
-                
-        //     })
-        //     .catch((error)=>console.log(error))
         const newsletterRef = collection(db, 'newsletter')
         getDocs(newsletterRef)
             .then((resp) =>{
@@ -25,6 +19,7 @@ const NewsletterListContainer = () => {
             })
             .catch((error)=>console.log(error))
     }, [])
+    
   return (
 
     <div className='ColumnNewsletter d-flex-column'>
