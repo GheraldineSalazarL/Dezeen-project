@@ -5,31 +5,31 @@ import { useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 // import { pedirDatosProyectos } from '../../Helpers/PedirDatos'
 import {db} from '../../context/ApiContext'
+import useProyectos from '../../hooks/useProyectos'
 
 const NavbarProjects = () => {
-  const [proyectos, setProyectos] = useState([])
+  
+  const entry = 'NavbarProjects'
   const {categoryId} = useParams()
+  const {Categories} = useProyectos(entry)
 
-  // pedirDatosProyectos()
-  //   .then((res) => {
-  //     setProyectos(res)
-  //   })
-  //   .catch((error)=>console.log(error))
+  // const [proyectos, setProyectos] = useState([])
+  // const {categoryId} = useParams()
 
-  useEffect(() => {
-    const proyectosRef = collection(db, 'proyectos')
-    getDocs(proyectosRef)
-            .then((resp) =>{
-                const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-                setProyectos(proyectosDB)
-            })
-            .catch((error)=>console.log(error))
-  }, [])
+  // useEffect(() => {
+  //   const proyectosRef = collection(db, 'proyectos')
+  //   getDocs(proyectosRef)
+  //           .then((resp) =>{
+  //               const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+  //               setProyectos(proyectosDB)
+  //           })
+  //           .catch((error)=>console.log(error))
+  // }, [])
 
-  const Categories = []
-  for (let i=0; i<proyectos.length; i++){
-    if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
-  } 
+  // const Categories = []
+  // for (let i=0; i<proyectos.length; i++){
+  //   if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
+  // } 
 
 
   return (
