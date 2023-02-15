@@ -10,6 +10,7 @@ import ProjectDetailContainer from "../components/Projects/ProjectDetailContaine
 import Login from "../components/Login/Login.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Sigin from "../components/Sigin/Sigin.jsx";
+import ProjectsFoundContainer from '../components/ProjectsFound/ProjectsFoundContainer';
 
 const AppRouter = () => {
 
@@ -41,6 +42,7 @@ const AppRouter = () => {
                 <Route path="/proyectos" element={<Proyectos/>} />
                 <Route path="/proyectos/:categoryId" element={<Proyectos/>}/>
                 <Route path="/proyectos/:categoryId/:proyectoId" element={<ProjectDetailContainer/>}/>
+                <Route path="/search/:searchId" element={<ProjectsFoundContainer/>} />
             </Routes>
             <Footer/>
         

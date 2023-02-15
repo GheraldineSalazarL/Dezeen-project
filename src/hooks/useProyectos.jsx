@@ -7,7 +7,9 @@ import { useParams } from 'react-router-dom';
 const useProyectos = (entry) => {
 
     const {categoryId} = useParams()
+    const {searchId} = useParams()
     const [proyectos, setProyectos] = useState([])
+    console.log(searchId)
 
     const Categories = []
     for (let i=0; i<proyectos.length; i++){
@@ -20,6 +22,8 @@ const useProyectos = (entry) => {
         dep = [cat]
     } else if( entry === 'NavbarProjects'){
         dep = []
+    } else if(entry === 'ProjectsFoundContainer'){
+        dep = [searchId]
     } else {
         dep = [categoryId]
     }
@@ -31,7 +35,7 @@ const useProyectos = (entry) => {
         if(entry === 'ProjectListContainer'){
             q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
         }
-        if(entry === 'NavbarProjects'){
+        if(entry === 'NavbarProjects' || entry === 'ProjectsFoundContainer'){
             q = proyectosRef
         }
         if(entry === 'CarouselListContainer'){
@@ -58,6 +62,7 @@ const useProyectos = (entry) => {
             })
             .catch((error)=>console.log(error))
     }, dep)
+
 
   return ({
     proyectos, Categories, cat

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { FaSearch  } from 'react-icons/fa';
 import { FaRegUserCircle  } from 'react-icons/fa';
 import { FaBars  } from 'react-icons/fa';
 import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
 import logo from '../../assets/dezeen-logo.png'
+import Search from '../Search/Search';
 
 const Navbar = () => {
 
@@ -13,12 +13,6 @@ const Navbar = () => {
     console.log(user)
 
     const location = useLocation()
-
-    const handleSubmit = (event) =>{
-        event.preventDefault()
-        console.log("submit")
-    }
-
     const navActive = () => {
         if(location.pathname!=="/login" && location.pathname!=="/sigin"){
             return "Navbar d-flex-row font-roboto-cond black"
@@ -31,15 +25,7 @@ const Navbar = () => {
     <nav className={navActive()}>
         <div className='d-flex-row d-flex-center'>
             <NavLink to='/*' className='LogoContain'> <img className='logo' src={logo} alt="" /> </NavLink>
-            <form className='search d-flex-row d-flex-center' onSubmit={handleSubmit}>
-                <button type='submit'><FaSearch className='icon'/></button>
-                <input 
-                    type="text" 
-                    name="" 
-                    id="" 
-                    placeholder='¿Qué estás buscando hoy?'
-                />
-            </form>
+            <Search/>
         </div>
         <div className='d-flex-row d-flex-center'>
             <div className='itemsMenu d-flex-row d-flex-center'>
