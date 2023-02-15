@@ -2,16 +2,6 @@ import React from 'react'
 import ProjectFound from '../ProjectFound/ProjectFound'
 
 const ProjectsFoundList = ({projectsFound=[], searchId}) => {
-
-    // const projectsFound = []
-
-    // for(let i=0; i<proyectos.length; i++){
-    //     proyectos[i].titulo.toLowerCase().includes(searchId.toLocaleLowerCase) 
-    //     && projectsFound.push(proyectos[i])
-    // }
-
-    // console.log (projectsFound)
-    // console.log(proyectos[0].titulo)
     
     console.log(projectsFound.titulo)
   

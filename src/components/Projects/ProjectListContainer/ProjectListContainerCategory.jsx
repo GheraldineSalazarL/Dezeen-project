@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { pedirDatosProyectos } from '../../../Helpers/PedirDatos'
 import ProjectList from '../ProjectList/ProjectList'
 import { FaArrowRight  } from  "react-icons/fa";
 import { collection, getDocs, query, where } from 'firebase/firestore'
