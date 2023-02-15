@@ -65,7 +65,7 @@ export const ApiContext = ({ children }) => {
         //     toMail:""
         // }
 
-        emailjs.send('service_rkbguuj', 'template_7y8c547', data)
+        emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
             .then(function(response) {
                 console.log(response)
             return(true)
