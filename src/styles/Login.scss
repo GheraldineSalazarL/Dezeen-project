@@ -33,17 +33,31 @@
                 width: 70%;
                 .input-forms{
                     margin-bottom: 52px;
-                    input{
-                        height: 48px;
-                        border: 1px solid #606999;
-                        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-                        border-radius: 10px;
-                        padding: 13px 10px 13px 10px;
-                        font-size: 12px;
-                        color: #606999;;
-                    }
-                    input::placeholder { 
-                        color: #979797; 
+                    .inputContent{
+                        position: relative;
+                        input{
+                            width: 100%;
+                            height: 48px;
+                            border: 1px solid #606999;
+                            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+                            border-radius: 10px;
+                            padding: 13px 10px 13px 10px;
+                            font-size: 12px;
+                            color: #606999;;
+                        }
+                        input::placeholder { 
+                            color: #979797; 
+                        }
+                        .iconVisible{
+                            position: absolute;
+                            top: 36%;
+                            right: 10px;
+                            color: #606999;
+                        }
+                        .iconOculto{
+                            display: none;
+                        }
+                        
                     }
                     .labelInput{
                         font-weight: 500;
@@ -75,6 +89,10 @@
                         width: 16px;
                         height: 16px;
                     }
+                    .checkbox:checked {
+                        appearance: none;
+                        background-color: #606999 !important;
+                      }
                     .checkboxLabel{
                         font-size: 12px;
                         span{
@@ -110,3 +128,49 @@
     }
     
 }
+
+.swal2-modal {
+    background-color: rgba(0,0,0,0) !important;
+    border-radius: 20px !important;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5)) !important;
+    background-image: url("../assets/confirm.png") !important;
+    height: 608px !important;
+    padding: 200px 0px 200px 0px !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    text-decoration: none;
+    .custom-button {
+        background-color: #606999 !important;
+        border-radius: 10px !important;
+        height: 48px !important;
+        width: 352px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 19px !important;
+        letter-spacing: 0.0015em !important;
+        margin: 0px;
+      }
+      .swal2-title{
+        font-style: normal !important;
+        font-weight: 700 !important;
+        font-size: 48px !important;
+        line-height: 56px !important;
+        color: #000000 !important;
+      }
+      .swal2-html-container{
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 16px !important;
+        letter-spacing: 0.0025em !important;
+        color: #5F6368 !important; 
+        margin: 0px !important;
+      }
+}
+
+.input-error{
+    color:#EE513B !important;
+}
+
+
+

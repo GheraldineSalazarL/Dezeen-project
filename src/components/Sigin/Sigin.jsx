@@ -1,9 +1,109 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useState } from 'react';
 import { AiOutlinePlus } from "react-icons/ai";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import imgSigin from '../../assets/login-1.png'
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2'
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../context/ApiContext';
+import { LoginContext } from '../../context/LoginContext';
+import imgModal from '../../assets/confirm.png'
+import { BsCheck2 } from 'react-icons/bs';
+import { VscClose } from "react-icons/vsc";
+
+
 
 const Sigin = () => {
+
+    const {usuarios} = useContext(LoginContext)
+    const navigate = useNavigate();
+
+    const [values, setValues] = useState({
+        email: '',
+        password: '',
+        rePassword: '',
+    })
+    const [check, setCheck] = useState(true)
+    const [msjEmail, setMsjEmail] = useState('')
+    const [msjPass1, setMsjPass1] = useState('')
+    const [msjPass2, setMsjPass2] = useState('')
+
+    const handleInputChange = (e) => {
+        setValues ({
+            ...values,
+            [e.target.name] : e.target.value,
+        })
+
+        e.target.name === "email" && setMsjEmail('')
+        e.target.name === "password" && setMsjPass1('')
+        e.target.name === "rePassword" && setMsjPass2('')
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(usuarios.find(user => user.email === values.email)){
+            setMsjEmail("Este correo ya pertenece a un usuario.")
+        }
+        if(values.email === ""){
+            setMsjEmail("Ingresar un email")
+        }
+
+        if(values.password.length < 9){
+            setMsjPass1("Tu contraseña debe tener mínimo 10 caracteres.")
+        } 
+        if(values.password === ""){
+            setMsjPass1("Ingresar una contraseña.")
+        } 
+
+        if(values.rePassword === ""){
+            setMsjPass2('Repetir la contraseña.')
+            return
+        } 
+        if(values.password !== values.rePassword){
+            setMsjPass2('Tus contraseñas no coinciden.')
+            return
+        } 
+        if(check===false){
+            return
+        }
+                
+        const usuariosRef = collection(db, 'usuarios')
+        addDoc(usuariosRef, values)
+            .then((doc) =>{
+                const data = {
+                    nombre: values.email, 
+                    contrasena: values.password,
+                    toMail: values.email
+                }
+        
+                emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
+
+                Swal.fire({
+                    title: 'Usuario creado',
+                    width: 846,
+                    background: (imgModal),
+                    text: 'Hemos enviado un email con tu usuario y contraseña',
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    confirmButtonText: 'Iniciar sesión',
+                    customClass: {
+                        confirmButton: 'custom-button',
+                    },
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            navigate(`/login`);
+                        } 
+                    })
+        })
+        setValues({
+            email: '',
+            password: '',
+            rePassword: ''
+        })
+    }
+
   return (
     <div className='login d-flex-row font-roboto-cond black'>
         <NavLink to='/'><AiOutlinePlus className='iconClosed'/></NavLink>
@@ -14,59 +114,86 @@ const Sigin = () => {
             <div className='textLoginInt'>
                 <h2 className='h2-sigin'>¡Te damos la bienvenida!</h2>
                 <p className='font-w-400'>Regístrate y forma parte de la comunidad más grande de arquitectura en el mundo.</p>
-                <form className='formLogin d-flex-column' action="" >
+                <form onSubmit={handleSubmit} className='formLogin d-flex-column' action="" >
                     <div className='input-forms d-flex-column'>
-                        {/* { 
-                            email &&
+                        { 
+                            values.email &&
                             <label className='labelInput' for='email'>Ingresa tu email</label>
-                        } */}
-                        <input
-                            name='email'
-                            type={'email'}                       
-                            placeholder='Ingresa tu email'
-                            // value={email}
-                            // onChange={handleEmailChange}
-                        />
-                        {/* {
-                            user.msjUser &&
-                            <label className='labelError' for='email'> {user.msjUser}</label>
-                        } */}
+                        }
+                        <div className='inputContent'>
+                            <input
+                                name='email'
+                                type={'email'}                       
+                                placeholder='Ingresa tu email'
+                                value={values.email}
+                                onChange={handleInputChange}
+                                className={`${msjEmail ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.email && !msjEmail) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${msjEmail ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
+                        {
+                            msjEmail &&
+                            <label className='labelError' for='email'>{msjEmail}</label>
+                        }
                     </div>
 
                     <div className='input-forms d-flex-column'>
-                        {/* { 
-                            password &&
+                        { 
+                            values.password &&
                             <label className='labelInput' for='email'>Ingresa tu contraseña</label>
-                        } */}
-                        <input
-                            name='password'
-                            type={'password'}                       
-                            placeholder='Ingresa tu contraseña'
-                            // value={password}
-                            // onChange={handlePasswordChange}
-                        />
-                        {/* {
-                            user.msjPassword &&
-                            <label className='labelError' for='email'> {user.msjPassword}</label>
-                        } */}
+                        }
+                        <div className='inputContent'>
+                            <input
+                                name='password'
+                                type={'password'}                       
+                                placeholder='Ingresa tu contraseña'
+                                value={values.password}
+                                onChange={handleInputChange}
+                                className={`${msjPass1 ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.password && !msjPass1) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${msjPass1 ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
+                        {
+                                msjPass1  &&
+                                <label className='labelError' for='email'> {msjPass1}</label>
+                        }
                     </div>
 
                     <div className='input-forms d-flex-column'>
-                        {/* { 
-                            password &&
-                            <label className='labelInput' for='email'>Ingresa tu contraseña</label>
-                        } */}
-                        <input
-                            name='confirmPassword'
-                            type={'password'}                       
-                            placeholder='Confirma tu contraseña'
-                            // value={password}
-                            // onChange={handlePasswordChange}
-                        />
-                        {/* {
-                            user.msjPassword &&
-                            <label className='labelError' for='email'> {user.msjPassword}</label>
-                        } */}
+                        { 
+                            values.rePassword &&
+                            <label className='labelInput' for='email'>Confirma tu contraseña</label>
+                        }
+                        <div className='inputContent'>
+                            <input
+                                name='rePassword'
+                                type={'password'}                       
+                                placeholder='Confirma tu contraseña'
+                                value={values.rePassword}
+                                onChange={handleInputChange}
+                                className={`${msjPass2 ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.rePassword && !msjPass2) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${msjPass2 ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
+                        {
+                                msjPass2 &&
+                                <label className='labelError' for='email'> {msjPass2}</label>
+                        }
                     </div>
 
                     <button className='white-button'>
@@ -78,10 +205,12 @@ const Sigin = () => {
                         <input 
                             className='checkbox'
                             type="checkbox"
-                            name='terms'
-                            id='terms'
+                            name='check'
+                            onChange={() => {setCheck(!check)}}
+                            value={check}
+                            defaultChecked
                         />
-                        <label for="terms" className='checkboxLabel'>
+                        <label for="terms" className={`${check === true ? 'checkboxLabel' : 'checkboxLabel input-error'}`}>
                             Acepto los <span className='.principal-color'>Términos y Condiciones </span> de nuestra <br /> <span>Política de Privacidad.</span>
                         </label>
                     </div>
