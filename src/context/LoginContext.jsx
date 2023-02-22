@@ -1,68 +1,63 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { db } from "./ApiContext";
 
 
 export const LoginContext = createContext()
 
-const usuarios = [
-    { 
-        email:'abc@abc.com',
-        password: 'coder'
-    },
-    { 
-        email:'abc1@abc.com',
-        password: 'coder'
-    }
-]
 
 export const LoginProvider = ({children}) => {
+
+    const [usuarios, setUsuarios] = useState([])
+
+    useEffect(()=> {
+        const userRef = collection(db, 'usuarios')
+        getDocs(userRef)
+            .then((resp) =>{
+                const usuariosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
+                setUsuarios(usuariosDB)
+            })
+            .catch((error)=>console.log(error))
+    }, [])
+
 
     const loginStorage = JSON.parse(localStorage.getItem('logeo')) || 
     [{
         user : '',
         logged:false,
-        msjPassword:'',
-        msjUser:''
+        recording: false
     }]
 
     const [user, setUser] = useState(loginStorage)
     
-    const login = (values) => {
-        const match = usuarios.find(user => user.email === values.email)
-
-        if (match){
-            if(match.password === values.password){
-                setUser({
-                    user: match.email,
-                    logged: true
-                })
-            }else{
-                setUser({
-                    msjPassword:'tu contraseña es incorrecta'
-                })
-            }
-        }else{
-            setUser({
-                msjUser:'no podemos encontrar este correo'
-            })
-        }
+    const login = (match, check) => {
+        setUser({
+            user: match.email,
+            logged: true,
+            recording: check
+        })
     }
 
     const logout = () => {
         setUser({
             user: '',
-            logged: false
+            logged: false,
+            recording: true
         })
         
     }
 
     useEffect(() => {
-        localStorage.setItem('logeo', JSON.stringify(user))
+        if(user.recording){
+            localStorage.setItem('logeo', JSON.stringify(user))
+        }
     },[user])
+    
 
     return(
-        <LoginContext.Provider value={{user, login, logout}}>
+        <LoginContext.Provider value={{user, login, logout, usuarios}}>
             {children}
         </LoginContext.Provider>
     )

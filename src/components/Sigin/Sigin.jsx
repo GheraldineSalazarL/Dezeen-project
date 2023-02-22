@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { AiOutlinePlus } from "react-icons/ai";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import imgSigin from '../../assets/login-1.png'
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2'
@@ -44,12 +44,13 @@ const Sigin = () => {
         e.preventDefault()
         if(usuarios.find(user => user.email === values.email)){
             setMsjEmail("Este correo ya pertenece a un usuario.")
+            return
         }
         if(values.email === ""){
             setMsjEmail("Ingresar un email")
         }
 
-        if(values.password.length < 9){
+        if(values.password.length <= 9){
             setMsjPass1("Tu contraseña debe tener mínimo 10 caracteres.")
         } 
         if(values.password === ""){
@@ -58,55 +59,56 @@ const Sigin = () => {
 
         if(values.rePassword === ""){
             setMsjPass2('Repetir la contraseña.')
-            return
         } 
         if(values.password !== values.rePassword){
             setMsjPass2('Tus contraseñas no coinciden.')
-            return
         } 
-        if(check===false){
-            return
-        }
-                
-        const usuariosRef = collection(db, 'usuarios')
-        addDoc(usuariosRef, values)
-            .then((doc) =>{
-                const data = {
-                    nombre: values.email, 
-                    contrasena: values.password,
-                    toMail: values.email
-                }
-        
-                emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
 
-                Swal.fire({
-                    title: 'Usuario creado',
-                    width: 846,
-                    background: (imgModal),
-                    text: 'Hemos enviado un email con tu usuario y contraseña',
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    confirmButtonText: 'Iniciar sesión',
-                    customClass: {
-                        confirmButton: 'custom-button',
-                    },
-                })
-                    .then((result) => {
-                        if (result.isConfirmed) {
-                            navigate(`/login`);
-                        } 
+        if(values.email !== "" && values.password.length > 9 && values.password !== "" && values.rePassword !== "" && values.password === values.rePassword && check===true){
+            const dataFB = {
+                email: values.email,
+                password: values.password
+            }
+            const usuariosRef = collection(db, 'usuarios')
+            addDoc(usuariosRef, dataFB)
+                .then((doc) =>{
+                    const data = {
+                        nombre: values.email, 
+                        contrasena: values.password,
+                        toMail: values.email
+                    }
+            
+                    emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
+
+                    Swal.fire({
+                        title: 'Usuario creado',
+                        width: 846,
+                        text: 'Hemos enviado un email con tu usuario y contraseña',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'Iniciar sesión',
+                        customClass: {
+                            confirmButton: 'custom-button',
+                            popup: 'custom-popup-sigin'
+                        },
                     })
-        })
-        setValues({
-            email: '',
-            password: '',
-            rePassword: ''
-        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                navigate(`/login`);
+                            } 
+                        })
+            })
+            setValues({
+                email: '',
+                password: '',
+                rePassword: ''
+            })
+        }
     }
 
   return (
     <div className='login d-flex-row font-roboto-cond black'>
-        <NavLink to='/'><AiOutlinePlus className='iconClosed'/></NavLink>
+        <NavLink to='/'><AiOutlinePlus className='iconClosedSigin'/></NavLink>
         <div className='imgLogin'>
             <img src={imgSigin} alt="" width="100%" height="100%"/>
         </div>
@@ -216,7 +218,7 @@ const Sigin = () => {
                     </div>
                     <div className='finishLogin d-flex-center d-flex-column font-w-400'>
                         <p>¿Ya tienes cuenta?</p>
-                        <NavLink to='/login' className='LinkSigIn principal-color'>Inicia sesión aquí</NavLink>
+                        <Link to='/login' className='LinkSigIn principal-color'>Inicia sesión aquí</Link>
                     </div>
                 </form>
             </div>

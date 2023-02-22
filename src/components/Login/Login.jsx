@@ -1,36 +1,89 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { AiOutlinePlus } from "react-icons/ai";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContext';
+import imgLogin from '../../assets/login-2.png'
+import { BsCheck2 } from 'react-icons/bs';
+import { VscClose } from "react-icons/vsc";
+import Swal from 'sweetalert2';
+import imgModal from '../../assets/confirm.png'
+import emailjs from '@emailjs/browser';
+import RemindPassword from '../Modals/RemindPassword';
 
 const Login = () => {
 
-    const {login, user} = useContext(LoginContext)
-    console.log(user)
+    const {user, login, usuarios} = useContext(LoginContext)
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [values, setValues] = useState({
+        email: '',
+        password: '',
+    })
 
-    const handleEmailChange = (e) =>{
-        setEmail(e.target.value)
+    const [msjLogin, setMsjLogin] = useState({
+        msjEmail: '',
+        msjPassword: '',
+    })
+
+    const [check, setCheck] = useState(true)
+
+    const [modal, setModal] = useState (false)
+
+    const handleInputChange = (e) => {
+        setValues ({
+            ...values,
+            [e.target.name] : e.target.value
+        })
+
+        e.target.name === "email" && setMsjLogin({msjPassword: '', errorEmail: ''})
+        e.target.name === "password" && setMsjLogin({msjEmail: '', errorPassword: ''})
     }
-
-    const handlePasswordChange = (e) =>{
-        setPassword(e.target.value)
-    }
-
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        login({ email, password})
+
+        const match = usuarios.find(user => user.email === values.email)
+        if (match){
+            if(match.password === values.password){
+                login(match, check)
+            }else{
+                setMsjLogin({
+                    msjEmail: '',
+                    msjPassword:'Tu contraseña es incorrecta.'
+                })
+            }
+        }else{
+            setMsjLogin({
+                msjPassword: '',
+                msjEmail:'No podemos encontrar este correo'
+            })
+        }
     }
 
-    
+    const handleRemind = (e) => {
+        setModal(true)
+    }
+
+    useEffect(()=>{
+        const handleClose = (e) =>{
+            if(e.target.className=== "modalRemind font-roboto-cond" || e.target.className.baseVal=== "iconCloseModal"){
+                setModal(false)
+            }
+            console.log(e.target.className.baseVal)
+
+        }
+
+        window.addEventListener('click', handleClose)
+
+        return () => {
+            window.removeEventListener('click', handleClose)
+        }
+        
+    },[modal])
 
   return (
     <div className='login d-flex-row font-roboto-cond black'>
-        <NavLink to='/'><AiOutlinePlus className='iconClosed'/></NavLink>
+        <NavLink to='/'><AiOutlinePlus className='iconClosedLogin'/></NavLink>
         <div className='textLogin'>
             <div className='textLoginInt'>
                 <h2 className='h2-login'>¡Te damos la bienvenida!</h2>
@@ -38,36 +91,54 @@ const Login = () => {
                 <form className='formLogin d-flex-column' onSubmit={handleSubmit} action="" >
                     <div className='input-forms d-flex-column'>
                         { 
-                            email &&
+                            values.email &&
                             <label className='labelInput' for='email'>Ingresa tu email</label>
                         }
-                        <input
-                            name='email'
-                            type={'email'}                       
-                            placeholder='Ingresa tu email'
-                            value={email}
-                            onChange={handleEmailChange}
-                        />
+                        <div className='inputContent'>
+                            <input
+                                name='email'
+                                type={'email'}                       
+                                placeholder='Ingresa tu email'
+                                value={values.email} 
+                                onChange={handleInputChange}
+                                className={`${msjLogin.msjEmail ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.email && !msjLogin.msjEmail) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${msjLogin.msjEmail ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            user.msjUser &&
-                            <label className='labelError' for='email'> {user.msjUser}</label>
+                            msjLogin.msjEmail &&
+                            <label className='labelError' for='email'> {msjLogin.msjEmail}</label>
                         }
                     </div>
 
                     <div className='input-forms d-flex-column'>
                         { 
-                            password &&
+                            values.password &&
                             <label className='labelInput' for='email'>Ingresa tu contraseña</label>
                         }
-                        <input
-                            name='password'
-                            type={'password'}                       
-                            placeholder='Ingresa tu contraseña'
-                            value={password}
-                            onChange={handlePasswordChange}
-                        />
+                        <div className='inputContent'>
+                            <input
+                                name='password'
+                                type={'password'}                       
+                                placeholder='Ingresa tu contraseña'
+                                value={values.password}
+                                onChange={handleInputChange}
+                                className={`${msjLogin.msjPassword ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.password && !msjLogin.msjPassword) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${msjLogin.msjPassword ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            user.msjPassword &&
+                            msjLogin.msjPassword &&
                             <label className='labelError' for='email'> {user.msjPassword}</label>
                         }
                     </div>
@@ -82,26 +153,33 @@ const Login = () => {
                             <input 
                                 className='checkbox'
                                 type="checkbox"
-                                name='terms'
-                                id='terms'
+                                name='check'
+                                onChange={() => {setCheck(!check)}}
+                                value={check}
+                                defaultChecked
                             />
                             <label for="terms" className='checkboxLabel'>
                                 Recuérdame
                             </label>
                         </div>
-                        <p><a className='principal-color' href="">Olvidé mi contraseña.</a></p>
+                        <Link className='principal-color' onClick={handleRemind}>Olvidé mi contraseña.</Link>
                     </div>
 
                     <div className='finishLogin d-flex-center d-flex-column font-w-400'>
                         <p>¿No tienes cuenta?</p>
-                        <NavLink to='/sigin' className='LinkSigIn principal-color'>Registrate aquí</NavLink>
+                        <Link to='/sigin' className='LinkSigIn principal-color'>Registrate aquí</Link>
                     </div>
                 </form>
             </div>
         </div>
         <div className='imgLogin'>
-            <img src="../../assets/login-2.png" alt="" width="100%" height="100%"/>
-        </div>    
+            <img src={imgLogin} alt="" width="100%" height="100%"/>
+        </div>   
+
+        {
+            modal===true &&
+                <RemindPassword/> 
+        }
 
     </div>
   )

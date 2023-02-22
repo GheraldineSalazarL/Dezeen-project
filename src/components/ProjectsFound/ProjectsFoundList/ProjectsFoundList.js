@@ -12,7 +12,7 @@ const ProjectsFoundList = ({projectsFound=[], searchId}) => {
       <div className='ProjectsFoundList'>
         {
             projectsFound.map((proy) => {
-                const searchText = proy.titulo.toLowerCase().normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").search(searchId.toLowerCase())
+                const searchText = proy["desc-1"].toLowerCase().normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").search(searchId.toLowerCase())
                 console.log(searchText)
                 if(searchText > -1){
                   return <ProjectFound projectFound={proy} key={proy.id}/>

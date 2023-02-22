@@ -28,7 +28,7 @@ const Creators = ({creador, props}) => {
         return () => {
             window.removeEventListener('click', handleClose)
         }
-    })
+    },[])
 
 
   return (

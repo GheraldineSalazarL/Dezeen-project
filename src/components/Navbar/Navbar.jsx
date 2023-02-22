@@ -10,7 +10,6 @@ import Search from '../Search/Search';
 const Navbar = () => {
 
     const {user, logout} = useContext(LoginContext)
-    console.log(user)
 
     const location = useLocation()
     const navActive = () => {
