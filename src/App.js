@@ -10,7 +10,11 @@ function App() {
   return (
     <ApiContext>
         <LoginProvider>
-            <AppRouter/>
+          <div id="mobile-warning">
+            <p>Este sitio está disponible sólo para desktop 1440px por el momento</p>
+            <p>This site is available only for desktop 1440px at this moment</p>
+          </div>
+          <AppRouter/>
         </LoginProvider>
     </ApiContext>
   );

@@ -3,6 +3,11 @@
       @content;
     }
 }
+@mixin screen_1439 {
+  @media (max-width: 1439px) {
+    @content;
+  }
+}
 
 // @mixin screen_1450 {
 //     @media (min-width: 1450px) {
