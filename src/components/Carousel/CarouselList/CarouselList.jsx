@@ -11,13 +11,9 @@ const CarouselList = ({proyectos=[]}) => {
         {
             proyectos.map((proy,index) => {
                 return(
-                  <>
-                    {
                       imagenActual === index
                       &&
-                      <Carousel proyecto={proy} proyectosLength={proyectos.length} imagenActual={imagenActual} setImagenActual={setImagenActual} key={proy.id} />
-                    }
-                  </>
+                      <Carousel proyecto={proy} key={proy.id} proyectosLength={proyectos.length} imagenActual={imagenActual} setImagenActual={setImagenActual}  />
                 )
             })
         }

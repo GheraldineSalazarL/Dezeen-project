@@ -1,6 +1,4 @@
 import React from 'react'
-// import { FaArrowRight  } from  "react-icons/fa";
-import { useLocation } from 'react-router-dom';
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
 import CreatorsList from '../components/Creators/CreatorsList';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
@@ -9,9 +7,6 @@ import ProjectListContainerCategory from '../components/Projects/ProjectListCont
 import revista from '../assets/revista-banner.png'
 
 const Home = () => {
-
-  const location = useLocation()
-  console.log(location)
 
   return (
     <div className='Home font-roboto-cond black'>

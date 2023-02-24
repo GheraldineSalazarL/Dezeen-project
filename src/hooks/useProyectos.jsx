@@ -9,7 +9,6 @@ const useProyectos = (entry) => {
     const {categoryId} = useParams()
     const {searchId} = useParams()
     const [proyectos, setProyectos] = useState([])
-    console.log(searchId)
 
     const Categories = []
     for (let i=0; i<proyectos.length; i++){
@@ -48,7 +47,6 @@ const useProyectos = (entry) => {
         getDocs(q)
             .then((resp) =>{
                 const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-                // setProyectos(proyectosDB)
                 const newProyectosDB=[]
                 if(entry === 'CarouselListContainer' && categoryId){
                     for(let i=0; i<3; i++){
@@ -60,7 +58,6 @@ const useProyectos = (entry) => {
                     setProyectos(proyectosDB)
                 }
             })
-            .catch((error)=>console.log(error))
     }, dep)
 
 

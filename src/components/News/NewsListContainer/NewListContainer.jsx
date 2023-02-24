@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-// import { pedirDatosNoticias } from '../../../Helpers/PedirDatos'
 import NewsList from '../NewsList/NewsList'
 import { FaArrowRight  } from  "react-icons/fa";
 import {db} from '../../../context/ApiContext'
@@ -9,6 +8,7 @@ import { collection, getDocs } from 'firebase/firestore';
 const NewListContainer = () => {
 
     const [noticias, setNoticias] = useState([])
+    
     useEffect(() => {
         const newsRef = collection(db, 'noticias')
         getDocs(newsRef)
@@ -16,7 +16,6 @@ const NewListContainer = () => {
             const newsDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
             setNoticias(newsDB)
         })
-        .catch((error)=>console.log(error))
     }, [])
 
     const [viewAcual, setViewActual] = useState(0)

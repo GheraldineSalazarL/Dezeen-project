@@ -2,10 +2,7 @@ import React from 'react'
 import { BsStar } from "react-icons/bs";
 import NewsletterListContainer from '../../Newsletters/NewsletterListContainer/NewsletterListContainer';
 
-
-
 const ProjectDetail = ({proyecto}) => {
-
 
   return (
     <div className='ProjectDet d-flex-row'>

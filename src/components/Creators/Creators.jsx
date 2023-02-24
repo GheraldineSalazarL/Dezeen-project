@@ -3,13 +3,13 @@ import { useState } from 'react'
 import { SiGmail } from "react-icons/si";
 import { BsLinkedin, BsGithub, BsBehance } from "react-icons/bs";
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
-const Creators = ({creador, props}) => {
+const Creators = ({creador, props, show, setShow}) => {
 
     const [hover, setHover] = useState(false)
     const handleMouseEnter =() => {
         setHover(true)
+        setShow(creador.nombre)
     }
 
     const handleMouseLeave = () => {
@@ -35,7 +35,7 @@ const Creators = ({creador, props}) => {
     <>
         <img onMouseEnter={handleMouseEnter} src={creador.foto} alt="" />
         {
-            hover 
+            hover && show===creador.nombre
             && 
             <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='modal'>
                 <div className='modalContent'>

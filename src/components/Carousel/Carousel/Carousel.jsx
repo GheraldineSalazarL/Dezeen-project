@@ -1,9 +1,6 @@
 import React from 'react'
-// import { useState } from 'react';
 import { FaArrowRight,  FaArrowLeft} from "react-icons/fa";
 import { Link } from 'react-router-dom';
-// import { handlePrevious, handleNext } from '../CarouselList/CarouselList'
-
 
 const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) => {
 
@@ -22,12 +19,10 @@ const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) =>
   for (let i = 0; i < proyectosLength; i++) {
     items.push(i+1);
   } 
-
-  // const May = proyecto.category
   
   return (
     <div className='Carousel'>
-              <Link to={`/proyectos/${proyecto.id}/${proyecto.id}`}><img src={proyecto['foto-main-1']} alt="" /></Link>
+              <Link to={`/proyectos/${proyecto.categoria}/${proyecto.id}`}><img src={proyecto['foto-main-1']} alt="" /></Link>
               <h3 >{proyecto.categoria}</h3>
               <h1 > {proyecto.titulo}</h1>
               <h4 >{proyecto.tipo}</h4>
@@ -37,7 +32,7 @@ const Carousel = ({proyecto, proyectosLength, imagenActual, setImagenActual}) =>
               <div className='itemsAll d-flex-row d-flex-center'>
                 {
                   items.map((_, index) => (
-                    <button onClick={() => handleSelect(index)} className={imagenActual===index ? "item-active" : "item"}></button>
+                    <button onClick={() => handleSelect(index)} key={index} className={imagenActual===index ? "item-active" : "item"}></button>
                   ))
                 }
               </div>

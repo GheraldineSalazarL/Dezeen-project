@@ -1,10 +1,5 @@
-import { collection, getDocs } from 'firebase/firestore'
-import React, { useContext } from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React from 'react'
 import { NavLink, useParams } from 'react-router-dom'
-// import { pedirDatosProyectos } from '../../Helpers/PedirDatos'
-import {db} from '../../context/ApiContext'
 import useProyectos from '../../hooks/useProyectos'
 
 const NavbarProjects = () => {
@@ -13,30 +8,12 @@ const NavbarProjects = () => {
   const {categoryId} = useParams()
   const {Categories} = useProyectos(entry)
 
-  // const [proyectos, setProyectos] = useState([])
-  // const {categoryId} = useParams()
-
-  // useEffect(() => {
-  //   const proyectosRef = collection(db, 'proyectos')
-  //   getDocs(proyectosRef)
-  //           .then((resp) =>{
-  //               const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-  //               setProyectos(proyectosDB)
-  //           })
-  //           .catch((error)=>console.log(error))
-  // }, [])
-
-  // const Categories = []
-  // for (let i=0; i<proyectos.length; i++){
-  //   if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
-  // } 
-
 
   return (
         <nav className='MenuProyectos d-flex-row d-flex-center font-w-400' >
           {
             Categories.map((cat) => {
-                  return <NavLink to={`/proyectos/${cat}`} className={`ItemMenuProyecto ${cat===categoryId ? "colorSelect" : ""}`}>{cat}</NavLink>
+                  return <NavLink to={`/proyectos/${cat}`} key={cat} className={`ItemMenuProyecto ${cat===categoryId ? "colorSelect" : ""}`}>{cat}</NavLink>
                   
               })
           }

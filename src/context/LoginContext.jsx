@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
@@ -6,7 +6,6 @@ import { db } from "./ApiContext";
 
 
 export const LoginContext = createContext()
-
 
 export const LoginProvider = ({children}) => {
 
@@ -19,7 +18,6 @@ export const LoginProvider = ({children}) => {
                 const usuariosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
                 setUsuarios(usuariosDB)
             })
-            .catch((error)=>console.log(error))
     }, [])
 
 

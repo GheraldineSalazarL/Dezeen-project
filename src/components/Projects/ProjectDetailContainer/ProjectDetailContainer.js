@@ -17,7 +17,6 @@ import NavbarProjects from '../../NavbarProjects/NavbarProjects';
         .then((doc) => {
           setDetalleProyecto({id:doc.id, ...doc.data()})
         })
-        .catch((error)=>console.log(error))
   }, [])
 
   return (

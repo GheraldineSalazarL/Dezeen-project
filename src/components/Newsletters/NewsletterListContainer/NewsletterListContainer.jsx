@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import NewsletterList from '../NewsletterList/NewsletterList'
-// import { pedirDatosNewsletter } from '../../../Helpers/PedirDatos'
 import { MdOutlineAlternateEmail, MdCheck } from "react-icons/md";
 import { collection, getDocs } from 'firebase/firestore';
 import {db} from '../../../context/ApiContext'
@@ -17,7 +16,6 @@ const NewsletterListContainer = () => {
                 const newslettersDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
                 setNewsletters(newslettersDB)
             })
-            .catch((error)=>console.log(error))
     }, [])
     
   return (
@@ -30,10 +28,8 @@ const NewsletterListContainer = () => {
             <MdCheck/>
         </div>
         <NewsletterList newsletters={newsletters}/>
-        
     </div>
 
-    
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -8,10 +8,8 @@ import Swal from 'sweetalert2'
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../context/ApiContext';
 import { LoginContext } from '../../context/LoginContext';
-import imgModal from '../../assets/confirm.png'
 import { BsCheck2 } from 'react-icons/bs';
 import { VscClose } from "react-icons/vsc";
-
 
 
 const Sigin = () => {
@@ -24,10 +22,14 @@ const Sigin = () => {
         password: '',
         rePassword: '',
     })
+
+    const [error, setError] = useState({
+        msjEmail: '',
+        msjPass1: '',
+        msjPass2: ''
+    })
+
     const [check, setCheck] = useState(true)
-    const [msjEmail, setMsjEmail] = useState('')
-    const [msjPass1, setMsjPass1] = useState('')
-    const [msjPass2, setMsjPass2] = useState('')
 
     const handleInputChange = (e) => {
         setValues ({
@@ -35,75 +37,83 @@ const Sigin = () => {
             [e.target.name] : e.target.value,
         })
 
-        e.target.name === "email" && setMsjEmail('')
-        e.target.name === "password" && setMsjPass1('')
-        e.target.name === "rePassword" && setMsjPass2('')
+        e.target.name === "email" && setError({...error, msjEmail: ''})
+        e.target.name === "password" && setError({...error, msjPass1: ''})
+        e.target.name === "rePassword" && setError({...error, msjPass2: ''})
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if(usuarios.find(user => user.email === values.email)){
-            setMsjEmail("Este correo ya pertenece a un usuario.")
+            setError({...error, msjEmail: 'Este correo ya pertenece a un usuario.'})
             return
         }
         if(values.email === ""){
-            setMsjEmail("Ingresar un email")
+            setError({...error, msjEmail: 'Ingresar un email'})
+            return
         }
-
         if(values.password.length <= 9){
-            setMsjPass1("Tu contraseña debe tener mínimo 10 caracteres.")
+            setError({...error, msjPass1: 'Tu contraseña debe tener mínimo 10 caracteres.'})
+            return
         } 
         if(values.password === ""){
-            setMsjPass1("Ingresar una contraseña.")
+            setError({...error, msjPass1: 'Ingresar una contraseña.'})
+            return
         } 
 
         if(values.rePassword === ""){
-            setMsjPass2('Repetir la contraseña.')
+            setError({...error, msjPass2: 'Repetir la contraseña.'})
+            return
         } 
         if(values.password !== values.rePassword){
-            setMsjPass2('Tus contraseñas no coinciden.')
+            setError({...error, msjPass2: 'Tus contraseñas no coinciden.'})
+            return
+        } 
+        if(check===false){
+            return
         } 
 
-        if(values.email !== "" && values.password.length > 9 && values.password !== "" && values.rePassword !== "" && values.password === values.rePassword && check===true){
-            const dataFB = {
-                email: values.email,
-                password: values.password
-            }
-            const usuariosRef = collection(db, 'usuarios')
-            addDoc(usuariosRef, dataFB)
-                .then((doc) =>{
-                    const data = {
-                        nombre: values.email, 
-                        contrasena: values.password,
-                        toMail: values.email
-                    }
-            
-                    emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
-
-                    Swal.fire({
-                        title: 'Usuario creado',
-                        width: 846,
-                        text: 'Hemos enviado un email con tu usuario y contraseña',
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'Iniciar sesión',
-                        customClass: {
-                            confirmButton: 'custom-button',
-                            popup: 'custom-popup-sigin'
-                        },
-                    })
-                        .then((result) => {
-                            if (result.isConfirmed) {
-                                navigate(`/login`);
-                            } 
-                        })
-            })
-            setValues({
-                email: '',
-                password: '',
-                rePassword: ''
-            })
+        const dataFB = {
+            email: values.email,
+            password: values.password
         }
+
+        const usuariosRef = collection(db, 'usuarios')
+        addDoc(usuariosRef, dataFB)
+            .then((doc) =>{
+                const data = {
+                    nombre: values.email, 
+                    contrasena: values.password,
+                    toMail: values.email
+                }
+        
+                emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
+                    .then((result) => {
+                        Swal.fire({
+                            title: 'Usuario creado',
+                            width: 846,
+                            text: 'Hemos enviado un email con tu usuario y contraseña',
+                            allowEscapeKey: false,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Iniciar sesión',
+                            customClass: {
+                                confirmButton: 'custom-button',
+                                popup: 'custom-popup-sigin'
+                            },
+                        })
+                            .then((result) => {
+                                if (result.isConfirmed) {
+                                    navigate(`/login`);
+                                    navigate(0);
+                                } 
+                            })
+                    })
+        })
+        setValues({
+            email: '',
+            password: '',
+            rePassword: ''
+        })
     }
 
   return (
@@ -129,18 +139,18 @@ const Sigin = () => {
                                 placeholder='Ingresa tu email'
                                 value={values.email}
                                 onChange={handleInputChange}
-                                className={`${msjEmail ? "input-error" : ""}`}
+                                className={`${error.msjEmail ? "input-error" : ""}`}
                             />
                             {
                                 <>
-                                    <BsCheck2 className={`${(values.email && !msjEmail) ? 'iconVisible' : 'iconOculto'}`}/>
-                                    <VscClose className={`${msjEmail ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                    <BsCheck2 className={`${(values.email && !error.msjEmail) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.msjEmail ? 'iconVisible input-error' : 'iconOculto'}`}/>
                                 </>
                             }
                         </div>
                         {
-                            msjEmail &&
-                            <label className='labelError' for='email'>{msjEmail}</label>
+                            error.msjEmail &&
+                            <label className='labelError' for='email'>{error.msjEmail}</label>
                         }
                     </div>
 
@@ -156,18 +166,18 @@ const Sigin = () => {
                                 placeholder='Ingresa tu contraseña'
                                 value={values.password}
                                 onChange={handleInputChange}
-                                className={`${msjPass1 ? "input-error" : ""}`}
+                                className={`${error.msjPass1 ? "input-error" : ""}`}
                             />
                             {
                                 <>
-                                    <BsCheck2 className={`${(values.password && !msjPass1) ? 'iconVisible' : 'iconOculto'}`}/>
-                                    <VscClose className={`${msjPass1 ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                    <BsCheck2 className={`${(values.password && !error.msjPass1) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.msjPass1 ? 'iconVisible input-error' : 'iconOculto'}`}/>
                                 </>
                             }
                         </div>
                         {
-                                msjPass1  &&
-                                <label className='labelError' for='email'> {msjPass1}</label>
+                                error.msjPass1  &&
+                                <label className='labelError' for='email'> {error.msjPass1}</label>
                         }
                     </div>
 
@@ -183,18 +193,18 @@ const Sigin = () => {
                                 placeholder='Confirma tu contraseña'
                                 value={values.rePassword}
                                 onChange={handleInputChange}
-                                className={`${msjPass2 ? "input-error" : ""}`}
+                                className={`${error.msjPass2 ? "input-error" : ""}`}
                             />
                             {
                                 <>
-                                    <BsCheck2 className={`${(values.rePassword && !msjPass2) ? 'iconVisible' : 'iconOculto'}`}/>
-                                    <VscClose className={`${msjPass2 ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                    <BsCheck2 className={`${(values.rePassword && !error.msjPass2) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.msjPass2 ? 'iconVisible input-error' : 'iconOculto'}`}/>
                                 </>
                             }
                         </div>
                         {
-                                msjPass2 &&
-                                <label className='labelError' for='email'> {msjPass2}</label>
+                                error.msjPass2 &&
+                                <label className='labelError' for='email'> {error.msjPass2}</label>
                         }
                     </div>
 

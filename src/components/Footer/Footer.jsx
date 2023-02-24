@@ -19,10 +19,10 @@ const Footer = () => {
         <hr className='Separator'/>
         <div className='MenuFooter'>
             <ul className='d-flex-row black'>
-                <li><a href="">Trabaja en Dezeen</a></li>
-                <li><a href="">Guía de eventos</a></li>
-                <li><a href="">Aviso de privacidad</a></li>
-                <li><a href="">Contáctanos</a></li>
+                <li><a href="##">Trabaja en Dezeen</a></li>
+                <li><a href="##">Guía de eventos</a></li>
+                <li><a href="##">Aviso de privacidad</a></li>
+                <li><a href="##">Contáctanos</a></li>
                 <li className=''>
                     <Link><BsYoutube className='IconFooter'/></Link>
                     <Link><BsPinterest className='IconFooter'/></Link>

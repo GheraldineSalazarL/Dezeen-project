@@ -1,27 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { LoginContext } from '../../context/LoginContext'
 import emailjs from '@emailjs/browser';
-import { doc, setDoc, updateDoc } from "firebase/firestore"; 
+import { doc, updateDoc } from "firebase/firestore"; 
 import { db } from "../../context/ApiContext";
 import mailOk from '../../assets/Hands Mail.png'
 import { AiOutlineClose } from "react-icons/ai";
+import { BsCheck2 } from 'react-icons/bs';
+import { VscClose } from "react-icons/vsc";
+import Swal from 'sweetalert2';
 
-const RemindPassword = (modal) => {
+const RemindPassword = () => {
 
     const {usuarios} = useContext(LoginContext)
+
     const [values, setValues] =useState({
         email: "",
         codId: "",
         newPassword : "",
-        newPasswordRepit : "",
+        newPasswordRepit : ""
     })
 
-    const [errorEmail, setErrorEmail] =useState('')
-    const [errorCodId, setErrorCodId] =useState('')
-    const [errorNewPass, setErrorNewPass] =useState('')
-    const [errorNewPassRepit, setErrorNewPassRepit] =useState('')
-    
+    const [error, setError] = useState({
+        errorEmail: '',
+        errorCodId: '',
+        errorNewPass: '',
+        errorNewPassRepit: ''
+    })
 
     const [modals, setModals] = useState({
         remind: true,
@@ -37,22 +42,22 @@ const RemindPassword = (modal) => {
                 [e.target.name] : e.target.value
             })
 
-        e.target.name === "email" && setErrorEmail('')
-        e.target.name === "codId" && setErrorCodId('')
-        e.target.name === "newPassword" && setErrorNewPass('')
-        e.target.name === "newPasswordRepit" && setErrorNewPassRepit('')
+        e.target.name === "email" && setError({...error, errorEmail: ''})
+        e.target.name === "codId" && setError({...error, errorCodId: ''})
+        e.target.name === "newPassword" && setError({...error, errorNewPass: ''})
+        e.target.name === "newPasswordRepit" && setError({...error, errorNewPassRepit: ''})
     }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         
         if(modals.remind===true){
             if(match){
                 const data = {
-                    nombre: match.id, 
-                    contrasena: "",
+                    id: match.id,
                     toMail: match.email
                 }
-                emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
+                emailjs.send('service_rkbguuj', 'template_4x0n3pa', data, "EtNdfQu1yjfSB4fDT")
 
                 setModals({
                     remind: false,
@@ -60,49 +65,68 @@ const RemindPassword = (modal) => {
                     newPassOk: false
                 })  
             } else{
-                values.email === '' ? setErrorEmail("Ingrese un email") : setErrorEmail("Este correo no pertenece a ningún usuario") 
+                values.email === '' ? setError({...error, errorEmail: "Ingrese un email"}) : setError({...error, errorEmail: "Este correo no pertenece a ningún usuario"}) 
             }
         }
 
         if(modals.newPass===true){
             if(match.id === values.codId){
                 if(values.newPassword.length <= 9){
-                    setErrorNewPass("Tu contraseña debe tener mínimo 10 caracteres.")
+                    setError({...error, errorNewPass: "Tu contraseña debe tener mínimo 10 caracteres."})
+                    return
                 } 
                 if(values.newPassword === ""){
-                    setErrorNewPass("Ingresar una contraseña.")
+                    setError({...error, errorNewPass: "Ingresar una contraseña."})
+                    return
                 } 
-        
                 if(values.newPasswordRepit === ""){
-                    setErrorNewPassRepit('Repetir la contraseña.')
+                    setError({...error, errorNewPassRepit: 'Repetir la contraseña.'})
+                    return
                 } 
                 if(values.newPassword !== values.newPasswordRepit){
-                    setErrorNewPassRepit('Tus contraseñas no coinciden.')
+                    setError({...error, errorNewPassRepit: 'Tus contraseñas no coinciden.'})
+                    return
                 } 
 
-                if(values.newPassword.length > 9 && values.newPassword !== "" && values.newPasswordRepit !== "" && values.newPassword === values.newPasswordRepit){
-                    const usuarioRef = doc(db, 'usuarios', match.id);
-                    updateDoc(usuarioRef, { password: values.newPassword });
+                const usuarioRef = doc(db, 'usuarios', match.id);
+                updateDoc(usuarioRef, { password: values.newPassword });
 
-                    const data = {
-                        nombre: match.email, 
-                        contrasena: match.password,
-                        toMail: match.email
-                    }
-            
-                    emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
-
-                    setModals({
-                        remind: false,
-                        newPass: false,
-                        newPassOk: true
-                    }) 
+                const data = {
+                    nombre: match.email, 
+                    contrasena: values.newPassword,
+                    toMail: match.email
                 }
+        
+                emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
+
+                setModals({
+                    remind: false,
+                    newPass: false,
+                    newPassOk: true
+                }) 
 
             } else{
-                setErrorCodId("El código ID enviado no es correcto")
+                setError({...error, errorCodId: "El código ID enviado no es correcto"})
             }
         }
+    }
+
+    const handleResend = () =>{
+        
+        const data = {
+            id: match.id,
+            toMail: match.email
+        }
+        emailjs.send('service_rkbguuj', 'template_4x0n3pa', data, "EtNdfQu1yjfSB4fDT")
+            .then((result) => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Email reenviado',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
+            }) 
     }
 
 
@@ -120,17 +144,25 @@ const RemindPassword = (modal) => {
                             values.email &&
                             <label className='labelInput' for='email'>Ingresa tu email</label>
                         }
-                        <input 
-                            type="email" 
-                            name='email'
-                            value={values.email}
-                            onChange={handledInputChange}
-                            placeholder = "Ingresa tu email"
-                            className={`${errorEmail ? "input-error" : ""}`}
-                        />
+                        <div  className='inputContent'>
+                            <input 
+                                type="email" 
+                                name='email'
+                                value={values.email}
+                                onChange={handledInputChange}
+                                placeholder = "Ingresa tu email"
+                                className={`${error.errorEmail ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.email && !error.errorEmail) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.errorEmail ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            errorEmail &&
-                            <label className='error' for='email'> {errorEmail}</label>
+                            error.errorEmail &&
+                            <label className='error' for='email'> {error.errorEmail}</label>
                         }
                     </div>
                     <button className='blue-button'>Recuperar contraseña</button>
@@ -142,7 +174,7 @@ const RemindPassword = (modal) => {
             <div className='modalNewPassContainer'>
                 <AiOutlineClose className='iconCloseModal' />
                 <h1>Crea una nueva contraseña</h1>
-                <h4>¿No te llegó el correo? <Link onClick={handleSubmit} className='link'>Haz click aquí para reenviar.</Link></h4>
+                <h4>¿No te llegó el correo? <Link onClick={handleResend} className='link'>Haz click aquí para reenviar.</Link></h4>
                 <p>Tu nueva contraseña debe ser distinta a tus contraseñas anteriores.</p>
                 <form onSubmit={handleSubmit}>
                     <div className='input-labels'>
@@ -150,17 +182,25 @@ const RemindPassword = (modal) => {
                             values.codId &&
                             <label className='labelInput' for='email'>Ingresa el código ID enviado a tu correo</label>
                         }
-                        <input 
-                            type="text" 
-                            name='codId'
-                            value={values.codId}
-                            onChange={handledInputChange}
-                            placeholder = "Código ID"
-                            className={`${errorCodId ? "input-error" : ""}`}
-                        />
+                        <div  className='inputContent'>
+                            <input 
+                                type="text" 
+                                name='codId'
+                                value={values.codId}
+                                onChange={handledInputChange}
+                                placeholder = "Código ID"
+                                className={`${error.errorCodId ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.codId && !error.errorCodId) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.errorCodId ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            errorCodId &&
-                            <label className='error'> {errorCodId}</label>
+                            error.errorCodId &&
+                            <label className='error'> {error.errorCodId}</label>
                         }
                     </div>
                     <div className='input-labels'>
@@ -168,17 +208,25 @@ const RemindPassword = (modal) => {
                             values.newPassword &&
                             <label className='labelInput' for='email'>Crea una nueva contraseña</label>
                         }
-                        <input 
-                            type="password" 
-                            name='newPassword'
-                            value={values.newPassword}
-                            onChange={handledInputChange}
-                            placeholder = "Crea una nueva contraseña"
-                            className={`${errorNewPass ? "input-error" : ""}`}
-                        />
+                        <div  className='inputContent'>
+                            <input 
+                                type="password" 
+                                name='newPassword'
+                                value={values.newPassword}
+                                onChange={handledInputChange}
+                                placeholder = "Crea una nueva contraseña"
+                                className={`${error.errorNewPass ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.newPassword && !error.errorNewPass) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.errorNewPass ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            errorNewPass &&
-                            <label className='error' for='email'> {errorNewPass}</label>
+                            error.errorNewPass &&
+                            <label className='error' for='email'> {error.errorNewPass}</label>
                         }
                     </div>
                     <div className='input-labels'>
@@ -186,17 +234,25 @@ const RemindPassword = (modal) => {
                             values.newPasswordRepit&&
                             <label className='labelInput' for='email'>Repite tu nueva contraseña</label>
                         }
-                        <input 
-                            type="password" 
-                            name='newPasswordRepit'
-                            value={values.newPasswordRepit}
-                            onChange={handledInputChange}
-                            placeholder = "Repite tu nueva contraseña"
-                            className={`${errorNewPassRepit ? "input-error" : ""}`}
-                        />
+                        <div  className='inputContent'>
+                            <input 
+                                type="password" 
+                                name='newPasswordRepit'
+                                value={values.newPasswordRepit}
+                                onChange={handledInputChange}
+                                placeholder = "Repite tu nueva contraseña"
+                                className={`${error.errorNewPassRepit ? "input-error" : ""}`}
+                            />
+                            {
+                                <>
+                                    <BsCheck2 className={`${(values.newPasswordRepit && !error.errorNewPassRepit) ? 'iconVisible' : 'iconOculto'}`}/>
+                                    <VscClose className={`${error.errorNewPassRepit ? 'iconVisible input-error' : 'iconOculto'}`}/>
+                                </>
+                            }
+                        </div>
                         {
-                            errorNewPassRepit &&
-                            <label className='error' for='email'> {errorNewPassRepit}</label>
+                            error.errorNewPassRepit &&
+                            <label className='error error-repassword' for='email'> {error.errorNewPassRepit}</label>
                         }
                     </div>
 

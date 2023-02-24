@@ -14,7 +14,6 @@ const NewsList = ({noticias = [], viewAcual}) => {
 
   return (
     <div className="NewList d-flex-row">
-        {/* <div className='opacityImg'><div></div></div> */}
         <>{viewArray}</>
         <>
           {noticias.map((noticia) => {

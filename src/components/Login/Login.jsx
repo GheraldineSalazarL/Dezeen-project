@@ -6,14 +6,11 @@ import { LoginContext } from '../../context/LoginContext';
 import imgLogin from '../../assets/login-2.png'
 import { BsCheck2 } from 'react-icons/bs';
 import { VscClose } from "react-icons/vsc";
-import Swal from 'sweetalert2';
-import imgModal from '../../assets/confirm.png'
-import emailjs from '@emailjs/browser';
 import RemindPassword from '../Modals/RemindPassword';
 
 const Login = () => {
 
-    const {user, login, usuarios} = useContext(LoginContext)
+    const {login, usuarios} = useContext(LoginContext)
 
     const [values, setValues] = useState({
         email: '',
@@ -48,13 +45,13 @@ const Login = () => {
                 login(match, check)
             }else{
                 setMsjLogin({
-                    msjEmail: '',
+                    ...msjLogin,
                     msjPassword:'Tu contraseña es incorrecta.'
                 })
             }
         }else{
             setMsjLogin({
-                msjPassword: '',
+                ...msjLogin,
                 msjEmail:'No podemos encontrar este correo'
             })
         }
@@ -69,16 +66,13 @@ const Login = () => {
             if(e.target.className=== "modalRemind font-roboto-cond" || e.target.className.baseVal=== "iconCloseModal"){
                 setModal(false)
             }
-            console.log(e.target.className.baseVal)
-
         }
 
         window.addEventListener('click', handleClose)
 
         return () => {
             window.removeEventListener('click', handleClose)
-        }
-        
+        }   
     },[modal])
 
   return (
@@ -139,7 +133,7 @@ const Login = () => {
                         </div>
                         {
                             msjLogin.msjPassword &&
-                            <label className='labelError' for='email'> {user.msjPassword}</label>
+                            <label className='labelError' for='email'> {msjLogin.msjPassword}</label>
                         }
                     </div>
 

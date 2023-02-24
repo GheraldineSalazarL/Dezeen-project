@@ -1,34 +1,15 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-// import {pedirDatosProyectos} from '../../../Helpers/PedirDatos'
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import ProjectList from '../ProjectList/ProjectList'
 import { FaArrowRight  } from  "react-icons/fa";
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import {db} from '../../../context/ApiContext'
 import useProyectos from '../../../hooks/useProyectos';
 
 const ProjectListContainer = () => {
 
     const entry = 'ProjectListContainer'
-    const {categoryId} = useParams()
     const {proyectos} = useProyectos(entry)
     const location = useLocation()
-
-    // const [proyectos, setProyectos] = useState([])
-    // const {categoryId} = useParams()
-    // const location = useLocation()
-
-    // useEffect(() => {
-    //     const proyectosRef = collection(db, 'proyectos')
-    //     const q = categoryId ? query(proyectosRef, where('categoria', '==', categoryId)) : proyectosRef
-    //     getDocs(q)
-    //         .then((resp) =>{
-    //             const proyectosDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
-    //             setProyectos(proyectosDB)
-    //         })
-    //         .catch((error)=>console.log(error))
-    // }, [categoryId])
 
     const [viewAcual, setViewActual] = useState(0)
 

@@ -31,14 +31,14 @@ const Navbar = () => {
                 {
                     user.logged
                     ?
-                        <NavLink onClick={logout} className={`itemM d-flex-center black font-w-400`}>Cerrar</NavLink>
+                        <NavLink onClick={logout} className={`itemM d-flex-center black font-w-400`}>Cerrar sesión</NavLink>
                     :
-                        <NavLink to='/login' className={`itemM d-flex-center black font-w-400 `}>Ingresa</NavLink>
+                        <NavLink to='/login' className={`itemM d-flex-center black font-w-400 `}>Iniciar sesión</NavLink>
                 }
                 <NavLink to='/proyectos' className={`itemM d-flex-center black font-w-400 ${location.pathname.includes(`/proyectos`) ? "colorSelect" : ""}`}>Proyectos</NavLink>
-                <NavLink to='/novedades' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/novedades" ? "colorSelect" : ""}`}>Novedades</NavLink>
-                <NavLink to='/comunidad' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/comunidad" ? "colorSelect" : ""}`}>Comunidad</NavLink>
-                <NavLink to='/nosotros' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/nosotros" ? "colorSelect" : ""}`}>Nosotros</NavLink>
+                <NavLink to='##' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/novedades" ? "colorSelect" : ""}`}>Novedades</NavLink>
+                <NavLink to='##' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/comunidad" ? "colorSelect" : ""}`}>Comunidad</NavLink>
+                <NavLink to='##' className={`itemM d-flex-center black font-w-400 ${location.pathname==="/nosotros" ? "colorSelect" : ""}`}>Nosotros</NavLink>
             </div>
             <Link><FaRegUserCircle className='iconMenu'/></Link>
             <Link><FaBars className='iconMenu'/></Link>

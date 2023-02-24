@@ -5,7 +5,6 @@ import { useContext } from "react";
 import Home from "../views/Home.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import Proyectos from "../views/Proyectos.jsx";
-import NavbarProjects from "../components/NavbarProjects/NavbarProjects.jsx";
 import ProjectDetailContainer from "../components/Projects/ProjectDetailContainer/ProjectDetailContainer.js";
 import Login from "../components/Login/Login.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
