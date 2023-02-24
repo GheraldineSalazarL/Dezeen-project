@@ -8,6 +8,11 @@ import NavbarProjects from '../../NavbarProjects/NavbarProjects';
 
  const ProjectDetailContainer = () => {
 
+  window.scrollTo({
+    top: 0,
+    behavior: "auto",
+  });
+
   const [detalleProyecto, setDetalleProyecto] = useState({ })
   const {proyectoId} = useParams()
 
