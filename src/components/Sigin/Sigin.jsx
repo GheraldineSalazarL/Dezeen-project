@@ -130,7 +130,7 @@ const Sigin = () => {
                     <div className='input-forms d-flex-column'>
                         { 
                             values.email &&
-                            <label className='labelInput' for='email'>Ingresa tu email</label>
+                            <label className='labelInput' >Ingresa tu email</label>
                         }
                         <div className='inputContent'>
                             <input
@@ -150,14 +150,14 @@ const Sigin = () => {
                         </div>
                         {
                             error.msjEmail &&
-                            <label className='labelError' for='email'>{error.msjEmail}</label>
+                            <label className='labelError' >{error.msjEmail}</label>
                         }
                     </div>
 
                     <div className='input-forms d-flex-column'>
                         { 
                             values.password &&
-                            <label className='labelInput' for='email'>Ingresa tu contraseña</label>
+                            <label className='labelInput' >Ingresa tu contraseña</label>
                         }
                         <div className='inputContent'>
                             <input
@@ -177,14 +177,14 @@ const Sigin = () => {
                         </div>
                         {
                                 error.msjPass1  &&
-                                <label className='labelError' for='email'> {error.msjPass1}</label>
+                                <label className='labelError' > {error.msjPass1}</label>
                         }
                     </div>
 
                     <div className='input-forms d-flex-column'>
                         { 
                             values.rePassword &&
-                            <label className='labelInput' for='email'>Confirma tu contraseña</label>
+                            <label className='labelInput' >Confirma tu contraseña</label>
                         }
                         <div className='inputContent'>
                             <input
@@ -204,7 +204,7 @@ const Sigin = () => {
                         </div>
                         {
                                 error.msjPass2 &&
-                                <label className='labelError' for='email'> {error.msjPass2}</label>
+                                <label className='labelError' > {error.msjPass2}</label>
                         }
                     </div>
 
@@ -222,7 +222,7 @@ const Sigin = () => {
                             value={check}
                             defaultChecked
                         />
-                        <label for="terms" className={`${check === true ? 'checkboxLabel' : 'checkboxLabel input-error'}`}>
+                        <label className={`${check === true ? 'checkboxLabel' : 'checkboxLabel input-error'}`}>
                             Acepto los <span className='.principal-color'>Términos y Condiciones </span> de nuestra <br /> <span>Política de Privacidad.</span>
                         </label>
                     </div>

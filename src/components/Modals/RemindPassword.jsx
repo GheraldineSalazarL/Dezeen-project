@@ -142,7 +142,7 @@ const RemindPassword = () => {
                     <div className='input-labels'>
                         { 
                             values.email &&
-                            <label className='labelInput' for='email'>Ingresa tu email</label>
+                            <label className='labelInput' >Ingresa tu email</label>
                         }
                         <div  className='inputContent'>
                             <input 
@@ -162,7 +162,7 @@ const RemindPassword = () => {
                         </div>
                         {
                             error.errorEmail &&
-                            <label className='error' for='email'> {error.errorEmail}</label>
+                            <label className='error' > {error.errorEmail}</label>
                         }
                     </div>
                     <button className='blue-button'>Recuperar contraseña</button>
@@ -180,7 +180,7 @@ const RemindPassword = () => {
                     <div className='input-labels'>
                         { 
                             values.codId &&
-                            <label className='labelInput' for='email'>Ingresa el código ID enviado a tu correo</label>
+                            <label className='labelInput' >Ingresa el código ID enviado a tu correo</label>
                         }
                         <div  className='inputContent'>
                             <input 
@@ -206,7 +206,7 @@ const RemindPassword = () => {
                     <div className='input-labels'>
                         { 
                             values.newPassword &&
-                            <label className='labelInput' for='email'>Crea una nueva contraseña</label>
+                            <label className='labelInput' >Crea una nueva contraseña</label>
                         }
                         <div  className='inputContent'>
                             <input 
@@ -226,13 +226,13 @@ const RemindPassword = () => {
                         </div>
                         {
                             error.errorNewPass &&
-                            <label className='error' for='email'> {error.errorNewPass}</label>
+                            <label className='error' > {error.errorNewPass}</label>
                         }
                     </div>
                     <div className='input-labels'>
                         { 
                             values.newPasswordRepit&&
-                            <label className='labelInput' for='email'>Repite tu nueva contraseña</label>
+                            <label className='labelInput' >Repite tu nueva contraseña</label>
                         }
                         <div  className='inputContent'>
                             <input 
@@ -252,7 +252,7 @@ const RemindPassword = () => {
                         </div>
                         {
                             error.errorNewPassRepit &&
-                            <label className='error error-repassword' for='email'> {error.errorNewPassRepit}</label>
+                            <label className='error error-repassword' > {error.errorNewPassRepit}</label>
                         }
                     </div>
 
@@ -266,7 +266,8 @@ const RemindPassword = () => {
                 <AiOutlineClose className='iconCloseModal' />
                 <img src={mailOk} alt="" />
                 <h1>¡Tu contraseña fue creada con éxito!</h1>
-                <p>En unos minutos te mandaremos una confirmación por correo. Cierra ésta pestaña para ingresar a tu cuenta.</p>
+                <p>En unos minutos te mandaremos una confirmación por correo. Click en "Iniciar sesión" para ingresar a tu cuenta.</p>
+                <a href="/login"><button className='blue-button'>Iniciar sesión</button></a>
             </div>
         }
     </div>

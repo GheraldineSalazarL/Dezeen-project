@@ -86,7 +86,7 @@ const Login = () => {
                     <div className='input-forms d-flex-column'>
                         { 
                             values.email &&
-                            <label className='labelInput' for='email'>Ingresa tu email</label>
+                            <label className='labelInput'>Ingresa tu email</label>
                         }
                         <div className='inputContent'>
                             <input
@@ -106,14 +106,14 @@ const Login = () => {
                         </div>
                         {
                             msjLogin.msjEmail &&
-                            <label className='labelError' for='email'> {msjLogin.msjEmail}</label>
+                            <label className='labelError' > {msjLogin.msjEmail}</label>
                         }
                     </div>
 
                     <div className='input-forms d-flex-column'>
                         { 
                             values.password &&
-                            <label className='labelInput' for='email'>Ingresa tu contraseña</label>
+                            <label className='labelInput' >Ingresa tu contraseña</label>
                         }
                         <div className='inputContent'>
                             <input
@@ -133,7 +133,7 @@ const Login = () => {
                         </div>
                         {
                             msjLogin.msjPassword &&
-                            <label className='labelError' for='email'> {msjLogin.msjPassword}</label>
+                            <label className='labelError' > {msjLogin.msjPassword}</label>
                         }
                     </div>
 
@@ -152,7 +152,7 @@ const Login = () => {
                                 value={check}
                                 defaultChecked
                             />
-                            <label for="terms" className='checkboxLabel'>
+                            <label className='checkboxLabel'>
                                 Recuérdame
                             </label>
                         </div>
