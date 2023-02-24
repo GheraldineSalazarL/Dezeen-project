@@ -65,6 +65,12 @@ export const ApiContext = ({ children }) => {
         //     toMail:""
         // }
 
+// TEMPLATE NUEVO template_4x0n3pa
+        // const array= {
+        //     id:"",
+        //     toMail:""
+        // }
+
         emailjs.send('service_rkbguuj', 'template_7y8c547', data, "EtNdfQu1yjfSB4fDT")
             .then(function(response) {
                 console.log(response)
