@@ -9,10 +9,6 @@ import { useLocation } from 'react-router-dom';
 
 const Home = () => {
 
-  window.scrollTo({
-    top: 0,
-    behavior: "auto",
-  });
 
   return (
     <div className='Home font-roboto-cond black'>

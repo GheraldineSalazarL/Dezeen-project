@@ -5,6 +5,7 @@ import logo from '../../assets/dezeen-logo2.png'
 const Footer = () => {
 
     const location = useLocation()
+    const scrollingElement = (document.scrollingElement || document.body);
 
     const footerActive = () => {
         if(location.pathname!=="/login" && location.pathname!=="/sigin"){
@@ -14,21 +15,25 @@ const Footer = () => {
         }
     }
 
+    const handleNavigate = () => {
+        scrollingElement.scrollTop = scrollingElement.scrollHeight;
+    }
+
   return (
     <div className={footerActive()}>
         <hr className='Separator'/>
         <div className='MenuFooter'>
             <ul className='d-flex-row black'>
-                <li><a href="##">Trabaja en Dezeen</a></li>
-                <li><a href="##">Guía de eventos</a></li>
-                <li><a href="##">Aviso de privacidad</a></li>
-                <li><a href="##">Contáctanos</a></li>
+                <li><Link onClick={handleNavigate} to='/'>Trabaja en Dezeen</Link></li>
+                <li><Link onClick={handleNavigate} to='/'>Guía de eventos</Link></li>
+                <li><Link onClick={handleNavigate} to='/'>Aviso de privacidad</Link></li>
+                <li><Link onClick={handleNavigate} to='/'>Contáctanos</Link></li>
                 <li className=''>
-                    <Link><BsYoutube className='IconFooter'/></Link>
-                    <Link><BsPinterest className='IconFooter'/></Link>
-                    <Link><BsTwitter className='IconFooter'/></Link>
-                    <Link><BsInstagram className='IconFooter'/></Link>
-                    <Link><BsFacebook className='IconFooter'/></Link>
+                    <Link onClick={handleNavigate} to='/'><BsYoutube className='IconFooter'/></Link>
+                    <Link onClick={handleNavigate} to='/'><BsPinterest className='IconFooter'/></Link>
+                    <Link onClick={handleNavigate} to='/'><BsTwitter className='IconFooter'/></Link>
+                    <Link onClick={handleNavigate} to='/'><BsInstagram className='IconFooter'/></Link>
+                    <Link onClick={handleNavigate} to='/'><BsFacebook className='IconFooter'/></Link>
                 </li>
             </ul>
         </div>
