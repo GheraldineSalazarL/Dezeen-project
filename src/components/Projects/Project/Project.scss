@@ -22,8 +22,26 @@
         }
         .ImagesProjectColumn{
             justify-content: space-between;
-            img{
-                object-fit: cover;  
+            .imgLength{
+                position: relative;
+                display: inline-block;
+                height: 304px;
+                width: 197px;
+                img{
+                    object-fit: cover;  
+                }
+                p{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 60px;
+                    line-height: 70px;
+                    letter-spacing: -0.005em;
+                    color: black;
+                }
             }
         }
     }

@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CarouselListContainer from '../components/Carousel/CarouselListContainer/CarouselListContainer';
 import CreatorsList from '../components/Creators/CreatorsList';
 import NewListContainer from '../components/News/NewsListContainer/NewListContainer';
 import ProjectListContainer from '../components/Projects/ProjectListContainer/ProjectListContainer';
 import ProjectListContainerCategory from '../components/Projects/ProjectListContainer/ProjectListContainerCategory';
 import revista from '../assets/revista-banner.png'
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
+
+  window.scrollTo({
+    top: 0,
+    behavior: "auto",
+  });
 
   return (
     <div className='Home font-roboto-cond black'>

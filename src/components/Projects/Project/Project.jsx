@@ -13,7 +13,13 @@ const Project = ({proyecto}) => {
               <div className='ImagesProjectColumn d-flex-column'>
                   <img src={proyecto["foto-main-2"]} alt="" height="131px" width="197px"/>
                   <img src={proyecto["foto-main-3"]} alt="" height="197px" width="197px"/>
-                  <img src={proyecto["foto-extra-1"]} alt="" height="295px" width="197px"/>
+                  <Link to={`/proyectos/${proyecto.categoria}/${proyecto.id}`}> 
+                      <div className='imgLength'> 
+                        <img src={proyecto["foto-extra-1"]} alt="" height="304px" width="197px"/>
+                        <p>+20</p>
+                      </div>
+                  </Link>
+                  
               </div>
           </div>
           <div className='TitleProject d-flex-row font-w-400'>

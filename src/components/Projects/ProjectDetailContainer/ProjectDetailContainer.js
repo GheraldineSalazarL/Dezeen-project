@@ -22,7 +22,7 @@ import NavbarProjects from '../../NavbarProjects/NavbarProjects';
         .then((doc) => {
           setDetalleProyecto({id:doc.id, ...doc.data()})
         })
-  }, [])
+  }, [proyectoId])
 
   return (
     <div>
