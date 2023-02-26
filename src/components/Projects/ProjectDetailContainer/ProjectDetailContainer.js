@@ -5,6 +5,8 @@ import ProjectDetail from '../ProjectDetail/ProjectDetail'
 import { doc, getDoc } from 'firebase/firestore';
 import {db} from '../../../context/ApiContext'
 import NavbarProjects from '../../NavbarProjects/NavbarProjects';
+import LoaderProjectDetail from '../../Loader/LoaderProjectDetail';
+import NewsletterListContainer from '../../Newsletters/NewsletterListContainer/NewsletterListContainer';
 
  const ProjectDetailContainer = () => {
 
@@ -15,20 +17,32 @@ import NavbarProjects from '../../NavbarProjects/NavbarProjects';
 
   const [detalleProyecto, setDetalleProyecto] = useState({ })
   const {proyectoId} = useParams()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+      setLoading(true)
       const docRef = doc(db, 'proyectos', proyectoId)
       getDoc(docRef)
         .then((doc) => {
           setDetalleProyecto({id:doc.id, ...doc.data()})
         })
+        .finally(() => {
+            setLoading(false)
+        })
   }, [proyectoId])
 
   return (
-    <div>
+    <>
       <NavbarProjects/>
-      <ProjectDetail proyecto={detalleProyecto}/>
-    </div>
+      <div className='ProjectDet d-flex-row'>
+          {
+            loading
+            ? <LoaderProjectDetail/>
+            : <ProjectDetail proyecto={detalleProyecto}/> 
+          }
+          <NewsletterListContainer/>
+      </div>
+    </>
   )
 }
 

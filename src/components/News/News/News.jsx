@@ -2,8 +2,6 @@ import React from 'react'
 
 const News = ({noticia}) => {
 
-
-
   return (
     <div className='News d-flex-column'>
         <img className='ImageNews' src={noticia.foto} alt="" />

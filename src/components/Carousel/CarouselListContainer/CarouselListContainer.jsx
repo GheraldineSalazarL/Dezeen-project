@@ -1,15 +1,22 @@
 import React from 'react'
 import CarouselList from '../CarouselList/CarouselList'
 import useProyectos from '../../../hooks/useProyectos'
+import LoaderCarousel from '../../Loader/LoaderCarousel'
 
 const CarouselListContainer = () => {
 
     const entry = 'CarouselListContainer'
-    const {proyectos} = useProyectos(entry)
+    const {proyectos, loading} = useProyectos(entry)
     
   return (
     <div>
-      <CarouselList proyectos={proyectos} />
+      {
+        loading
+        ? 
+          <LoaderCarousel/>
+        : 
+          <CarouselList proyectos={proyectos} />
+      }
     </div>
   )
 }

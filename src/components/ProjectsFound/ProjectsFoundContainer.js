@@ -1,16 +1,21 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import useProyectos from '../../hooks/useProyectos'
+import LoaderProjectsFound from '../Loader/LoaderProjectsFound'
 import ProjectsFoundList from './ProjectsFoundList/ProjectsFoundList'
 
 const ProjectsFoundContainer = () => {
 
     const {searchId} = useParams()
     const entry = 'ProjectsFoundContainer'
-    const {proyectos} = useProyectos(entry)
+    const {proyectos, loading} = useProyectos(entry)
 
   return (
-    <ProjectsFoundList  projectsFound={proyectos}  searchId={searchId}/>
+  
+      loading 
+      ? <LoaderProjectsFound/>
+      : <ProjectsFoundList  projectsFound={proyectos}  searchId={searchId}/>
+    
   )
 }
 

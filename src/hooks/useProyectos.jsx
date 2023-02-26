@@ -8,14 +8,15 @@ const useProyectos = (entry) => {
 
     const {categoryId} = useParams()
     const {searchId} = useParams()
-    const [proyectos, setProyectos] = useState([])
+    const [proyectos, setProyectos] = useState([]) 
+    const [loading, setLoading] = useState(true)
 
     const Categories = []
     for (let i=0; i<proyectos.length; i++){
         if(!Categories.includes(proyectos[i].categoria)) Categories.push(proyectos[i].categoria)
     } 
     const cat = Categories[Math.floor(Math.random() * Categories.length)]    
-
+    
     let dep=[]
     if(entry === 'ProjectListContainerCategory'){
         dep = [cat]
@@ -28,6 +29,7 @@ const useProyectos = (entry) => {
     }
 
     useEffect(()=> {
+        setLoading(true)
         const proyectosRef = collection(db, 'proyectos')
         
         let q = []
@@ -58,11 +60,14 @@ const useProyectos = (entry) => {
                     setProyectos(proyectosDB)
                 }
             })
+            .finally(() => {
+                setLoading(false)
+            })
     }, dep)
 
 
   return ({
-    proyectos, Categories, cat
+    proyectos, Categories, cat, loading
   })
 }
 

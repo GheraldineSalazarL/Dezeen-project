@@ -16,31 +16,27 @@ const ProjectList = ({proyectos = [], viewAcual}) => {
   } 
 
   return (
-    <>
-        {
-            location.pathname==="/"
-            ?
-                <div className="d-flex-row">
-                    <>{viewArray}</>
-                    <>
-                      {
-                          proyectos.map((proy) => {
-                              return <Project proyecto={proy} key={proy.id}/>
-                              
-                          })
-                      }
-                    </>
-                </div>
-            :
-                <div >
-                    {
-                        proyectos.map((proy) => {
-                            return <Project proyecto={proy} key={proy.id}/>
-                        })
-                    }
-                </div>
-        }
-    </>
+    location.pathname==="/"
+    ?
+        <div className="d-flex-row">
+            <>{viewArray}</>
+            <>
+              {
+                  proyectos.map((proy) => {
+                      return <Project proyecto={proy} key={proy.id}/>
+                      
+                  })
+              }
+            </>
+        </div>
+    :
+        <div >
+            {
+                proyectos.map((proy) => {
+                    return <Project proyecto={proy} key={proy.id}/>
+                })
+            }
+        </div>
   )
 }
 

@@ -4,17 +4,23 @@ import NewsletterList from '../NewsletterList/NewsletterList'
 import { MdOutlineAlternateEmail, MdCheck } from "react-icons/md";
 import { collection, getDocs } from 'firebase/firestore';
 import {db} from '../../../context/ApiContext'
+import LoaderNewsletter from '../../Loader/LoaderNewsletter';
 
 const NewsletterListContainer = () => {
 
     const [newsletters, setNewsletters] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
         const newsletterRef = collection(db, 'newsletter')
         getDocs(newsletterRef)
             .then((resp) =>{
                 const newslettersDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
                 setNewsletters(newslettersDB)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [])
     
@@ -27,7 +33,11 @@ const NewsletterListContainer = () => {
             <input type="text" name="" id="" placeholder='Ingresa tu email'/>
             <MdCheck/>
         </div>
-        <NewsletterList newsletters={newsletters}/>
+        {
+        loading
+        ? <LoaderNewsletter/>
+        : <NewsletterList newsletters={newsletters}/>
+      }
     </div>
 
   )

@@ -4,17 +4,23 @@ import NewsList from '../NewsList/NewsList'
 import { FaArrowRight  } from  "react-icons/fa";
 import {db} from '../../../context/ApiContext'
 import { collection, getDocs } from 'firebase/firestore';
+import LoaderNews from '../../Loader/LoaderNews';
 
 const NewListContainer = () => {
 
     const [noticias, setNoticias] = useState([])
-    
+    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
+        setLoading(true)
         const newsRef = collection(db, 'noticias')
         getDocs(newsRef)
         .then((resp) =>{
             const newsDB = resp.docs.map((doc) => ({id:doc.id, ...doc.data()}))
             setNoticias(newsDB)
+        })
+        .finally(() => {
+            setLoading(false)
         })
     }, [])
 
@@ -33,7 +39,11 @@ const NewListContainer = () => {
           <FaArrowRight className='icon'/>
         </button>
       </div>
-      <NewsList  noticias={noticias} viewAcual={viewAcual}/>
+      {
+        loading
+        ? <LoaderNews/>
+        : <NewsList  noticias={noticias} viewAcual={viewAcual}/>
+      }
     </div>
   )
 }
