@@ -22,7 +22,12 @@ const Navbar = () => {
     }
 
     const handleNavigate = () => {
-        scrollingElement.scrollTop = scrollingElement.scrollHeight;
+        setTimeout(() => {
+            window.scrollTo({
+                top: scrollingElement.scrollHeight,
+                behavior: "smooth",
+            });
+          }, 1);
     }
     
   return (

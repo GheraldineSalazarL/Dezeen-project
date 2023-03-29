@@ -7,7 +7,7 @@ const Project = ({proyecto}) => {
     
     return (
       <div className={`Project ${location.pathname==="/" ? "ProjectMarginRigth" : "ProjectMarginBottom"}`}>
-        <h2 className={location.pathname!=="/" ? "Tittle-active" : "Tittle-none"}>{proyecto.titulo}</h2>
+        <h2 className={location.pathname!=="/" ? "Tittle-active" : "Tittle-home"}>{proyecto.titulo} {proyecto.subtitulo ? `/ ${proyecto.subtitulo}` : ''} </h2>
           <div className='ImagesProject d-flex-row'>
               <img className='ImagePrincipal' src={proyecto["foto-main-1"]} alt="" />
               <div className='ImagesProjectColumn d-flex-column'>

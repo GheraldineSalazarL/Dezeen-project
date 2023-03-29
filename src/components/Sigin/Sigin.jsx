@@ -29,7 +29,7 @@ const Sigin = () => {
         msjPass2: ''
     })
 
-    const [check, setCheck] = useState(true)
+    const [check, setCheck] = useState(false)
 
     const handleInputChange = (e) => {
         setValues ({
@@ -220,9 +220,9 @@ const Sigin = () => {
                             name='check'
                             onChange={() => {setCheck(!check)}}
                             value={check}
-                            defaultChecked
+                            // defaultChecked
                         />
-                        <label className={`${check === true ? 'checkboxLabel' : 'checkboxLabel input-error'}`}>
+                        <label className='checkboxLabel'>
                             Acepto los <span className='.principal-color'>Términos y Condiciones </span> de nuestra <br /> <span>Política de Privacidad.</span>
                         </label>
                     </div>

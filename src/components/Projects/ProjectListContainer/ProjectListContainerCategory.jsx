@@ -19,7 +19,7 @@ const ProjectListContainerCategory = () => {
       <div>
           <div className='Headers'>
               <div className='SubTitle d-flex-row font-w-400'>
-              <h3>Proyectos de {cat ? cat : ""}</h3>
+              <h3>Proyectos Destacados</h3>
               <button onClick={handleAfter} className='ArrowRight d-flex-row font-roboto-cond'>
                   <p>Siguiente proyecto</p>
                   <FaArrowRight className='icon'/>

@@ -95,7 +95,6 @@
                     margin-top: 17px;
                     color: #797A7C;
                     .checkbox{
-                        border: 1px solid #606999;
                         border-radius: 4px;
                         margin-right: 6px;
                         margin-top: 0px;
@@ -106,7 +105,11 @@
                     .checkbox:checked {
                         appearance: none;
                         background-color: #606999 !important;
-                      }
+                    }
+                    .checkbox:not(:checked) {
+                        appearance: none;
+                        border: 1px solid #EE513B;
+                    }
                     .checkboxLabel{
                         font-size: 12px;
                         span{
@@ -124,6 +127,10 @@
                     a.principal-color{
                         text-decoration: none;
                         color: #979797;
+                    }
+                    .checkbox:not(:checked) {
+                        appearance: none;
+                        border: 1px solid #606999;
                     }
                 }
                 .finishLogin{

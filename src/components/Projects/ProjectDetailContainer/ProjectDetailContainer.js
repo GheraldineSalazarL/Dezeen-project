@@ -12,7 +12,7 @@ import NewsletterListContainer from '../../Newsletters/NewsletterListContainer/N
 
   window.scrollTo({
     top: 0,
-    behavior: "auto",
+    behavior: "smooth",
   });
 
   const [detalleProyecto, setDetalleProyecto] = useState({ })

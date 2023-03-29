@@ -8,8 +8,12 @@
         letter-spacing: 0.0025em;
         margin-bottom: 15px;
     }
-    .Tittle-none{
-        display: none;
+    .Tittle-home{
+        @extend .Tittle-active;
+        font-weight: 500;
+        color: #606999;
+        justify-content: end;
+        text-align: end;
     }
     .ImagesProject{
         margin-bottom: 13px;
