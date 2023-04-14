@@ -24,6 +24,7 @@ const Creators = ({creador, props, show, setShow}) => {
         }
 
         window.addEventListener('click', handleClose)
+        window.addEventListener('scroll', handleClose)
 
         return () => {
             window.removeEventListener('click', handleClose)
